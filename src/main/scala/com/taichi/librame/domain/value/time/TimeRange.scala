@@ -1,4 +1,4 @@
-package librame.time
+package librame.domain.value.time
 
 import java.time.LocalDateTime
 
