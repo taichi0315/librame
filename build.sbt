@@ -6,7 +6,9 @@ ThisBuild / organization     := "librame"
 ThisBuild / organizationName := "librame"
 
 lazy val commonSettings = Seq(
-  libraryDependencies += scalaTest % Test
+  libraryDependencies ++= Seq(
+    scalaTest % Test
+  )
 )
 
 lazy val root = (project in file("."))
