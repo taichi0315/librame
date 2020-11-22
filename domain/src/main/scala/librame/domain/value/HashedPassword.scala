@@ -1,9 +1,9 @@
-package ddd.lib.domain.value
+package librame.domain.value
 
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 
-import ddd.lib.domain.error.PasswordValidation
+import librame.domain.error.PasswordValidation
 
 case class HashedPassword(value: PasswordInfo) extends Value[PasswordInfo] {
   import HashedPassword.passwordHasher

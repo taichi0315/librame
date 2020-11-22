@@ -1,4 +1,4 @@
-package ddd.lib.domain.model
+package librame.domain.model
 
 trait Entity {
   val id: EntityId

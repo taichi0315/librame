@@ -1,4 +1,4 @@
-package ddd.lib.adapter.primary
+package librame.adapter.primary
 
 import play.api.libs.json.{ Reads, JsSuccess, JsError }
 import play.api.mvc.Results.BadRequest

@@ -1,6 +1,6 @@
-package ddd.lib.domain.value
+package librame.domain.value
 
-import ddd.lib.domain.error.EmailAddressValidation
+import librame.domain.error.EmailAddressValidation
 
 case class EmailAddress(value: String) extends Value[String]
 

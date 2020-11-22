@@ -1,4 +1,4 @@
-package ddd.lib.domain
+package librame.domain
 
 package object error {
   trait DomainValidation

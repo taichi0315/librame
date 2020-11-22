@@ -1,9 +1,9 @@
-package ddd.lib.adapter.secondary.kvs
+package librame.adapter.secondary.kvs
 
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
 
-import ddd.lib.domain.model._
+import librame.domain.model._
 
 trait CacheRepository[T <: EntityId] {
 

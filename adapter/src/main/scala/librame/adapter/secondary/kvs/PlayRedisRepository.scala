@@ -1,4 +1,4 @@
-package ddd.lib.adapter.secondary.kvs
+package librame.adapter.secondary.kvs
 
 import java.util.UUID
 
@@ -8,7 +8,7 @@ import scala.reflect.ClassTag
 
 import play.api.cache.redis.CacheAsyncApi
 
-import ddd.lib.domain.model._
+import librame.domain.model._
 
 class PlayRedisRepository[T <: EntityId : ClassTag](
   cache: CacheAsyncApi

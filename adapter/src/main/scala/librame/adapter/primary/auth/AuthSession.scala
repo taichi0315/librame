@@ -1,4 +1,4 @@
-package ddd.lib.adapter.primary.auth
+package librame.adapter.primary.auth
 
 import play.api.mvc._
 

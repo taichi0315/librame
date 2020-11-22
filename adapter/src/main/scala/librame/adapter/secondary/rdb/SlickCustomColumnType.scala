@@ -1,4 +1,4 @@
-package ddd.lib.adapter.secondary.rdb
+package librame.adapter.secondary.rdb
 
 import java.util.UUID
 
@@ -6,7 +6,7 @@ import scala.reflect.ClassTag
 
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 
-import ddd.lib.domain.value.Value
+import librame.domain.value.Value
 
 
 trait SlickCustomColumnType extends SlickDatabaseConfig {

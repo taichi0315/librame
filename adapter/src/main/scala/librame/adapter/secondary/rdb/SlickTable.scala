@@ -1,4 +1,4 @@
-package ddd.lib.adapter.secondary.rdb
+package librame.adapter.secondary.rdb
 
 import SlickDatabaseConfig.profile
 import slick.lifted.Tag

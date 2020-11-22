@@ -1,4 +1,4 @@
-package ddd.lib.adapter.primary.auth
+package librame.adapter.primary.auth
 
 import java.util.UUID
 
@@ -9,8 +9,8 @@ import play.api.libs.typedmap.TypedKey
 import play.api.mvc.Results.Status
 import play.api.mvc._
 
-import ddd.lib.adapter.secondary.kvs.CacheRepository
-import ddd.lib.domain.model._
+import librame.adapter.secondary.kvs.CacheRepository
+import librame.domain.model._
 
 abstract class AuthProfile[T <: EntityId]() (implicit ec: ExecutionContext) {
 

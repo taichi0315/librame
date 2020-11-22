@@ -1,3 +1,3 @@
-package ddd.lib.domain.value
+package librame.domain.value
 
 trait Value[T] { val value: T }

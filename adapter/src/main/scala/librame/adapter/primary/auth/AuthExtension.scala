@@ -1,10 +1,10 @@
-package ddd.lib.adapter.primary.auth
+package librame.adapter.primary.auth
 
 import scala.concurrent.{Future, ExecutionContext}
 
 import play.api.mvc._
 
-import ddd.lib.domain.model.EntityId
+import librame.domain.model.EntityId
 
 trait AuthExtension[T <: EntityId] {self: BaseControllerHelpers =>
   
