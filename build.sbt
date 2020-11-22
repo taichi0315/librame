@@ -6,8 +6,9 @@ ThisBuild / organization     := "librame"
 ThisBuild / organizationName := "librame"
 
 lazy val commonSettings = Seq(
-  name := "librame",
-  libraryDependencies += scalaTest % Test
+  libraryDependencies ++= Seq(
+    scalaTest % Test
+  )
 )
 
 lazy val root = (project in file("."))
@@ -17,6 +18,7 @@ lazy val root = (project in file("."))
 lazy val domain = (project in file("domain"))
   .settings(
     commonSettings,
+    name := "librame-domain",
     resolvers += "Atlassian Releases" at "https://maven.atlassian.com/public/",
     libraryDependencies ++= Seq(
       "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
@@ -26,6 +28,7 @@ lazy val domain = (project in file("domain"))
 lazy val application = (project in file("application"))
   .settings(
     commonSettings,
+    name := "librame-application",
     libraryDependencies ++= Seq(
       "org.atnos"              %% "eff" % "5.12.0",
     )
@@ -35,6 +38,7 @@ lazy val application = (project in file("application"))
 lazy val adapter = (project in file("adapter"))
   .settings(
     commonSettings,
+    name := "librame-adapter",
     resolvers += "Atlassian Releases" at "https://maven.atlassian.com/public/",
     libraryDependencies ++= Seq(
       "org.atnos"              %% "eff" % "5.12.0",
