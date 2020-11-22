@@ -12,7 +12,7 @@ lazy val commonSettings = Seq(
 
 lazy val root = (project in file("."))
   .settings(commonSettings)
-  .aggregate(domain)
+  .aggregate(domain, application)
 
 lazy val domain = (project in file("domain"))
   .settings(
@@ -27,13 +27,16 @@ lazy val application = (project in file("application"))
   .settings(
     commonSettings,
     libraryDependencies ++= Seq(
+      "org.atnos"              %% "eff" % "5.12.0",
     )
   )
 
+resolvers += "Atlassian Releases" at "https://maven.atlassian.com/public/"
 
 libraryDependencies ++= Seq(
   "com.typesafe.play"      %% "play-slick" % "5.0.0",
   "mysql"                   % "mysql-connector-java"  % "5.1.48",
+  "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
   "org.typelevel"          %% "cats-core" % "2.0.0",
   "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test,
   "com.github.karelcemus"  %% "play-redis" % "2.6.1",
