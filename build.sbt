@@ -44,6 +44,8 @@ lazy val adapter = (project in file("adapter"))
       "com.typesafe.slick"     %% "slick" % "3.3.3",
       "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
       "com.github.karelcemus"  %% "play-redis" % "2.6.1",
+      "org.tpolecat"           %% "doobie-core"      % "0.9.0",
+      "org.typelevel"          %% "cats-effect" % "2.2.0"
     )
   )
   .dependsOn(domain, application)
