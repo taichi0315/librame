@@ -9,8 +9,8 @@ class DoobieRepositoryMockTest extends FunSuite {
   test("test") {
     val repo = new DoobieRepositoryMock {}
 
-    val result = repo.get.transact(repo.xa).unsafeRunSync
+    val result = repo.get("nepp_yaga").transact(repo.xa).unsafeRunSync
 
-    assert(result == 0)
+    assert(result == None)
   }
 }

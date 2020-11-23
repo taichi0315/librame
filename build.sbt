@@ -42,6 +42,7 @@ lazy val adapter = (project in file("adapter"))
     libraryDependencies ++= Seq(
       "org.atnos"              %% "eff" % "5.12.0",
       "com.typesafe.slick"     %% "slick" % "3.3.3",
+      "mysql"                   % "mysql-connector-java"  % "5.1.48",
       "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
       "com.github.karelcemus"  %% "play-redis" % "2.6.1",
       "org.tpolecat"           %% "doobie-core"      % "0.9.0",

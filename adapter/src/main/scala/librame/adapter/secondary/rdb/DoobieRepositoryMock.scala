@@ -4,6 +4,6 @@ import doobie._
 import doobie.implicits._
 
 trait DoobieRepositoryMock extends DoobieDatabaseConfig {
-  def get: ConnectionIO[Option[String]] =
-    sql"select email from users".query[String].option
+  def get(userName: String): ConnectionIO[Option[String]] =
+    sql"select email from users where user_name = $userName".query[String].option
 }
