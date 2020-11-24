@@ -1,18 +1,19 @@
 package librame.adapter.secondary.rdb
 
+import javax.inject.Inject
 import scala.concurrent.ExecutionContext
 
 import doobie._
-import cats.effect.IO
-import play.api.db.DB
+import cats.effect._
+import play.api.db.DBApi
 
-trait DoobieDatabaseConfig {
+class DoobieDatabaseConfig @Inject()(db: DBApi) {
   
   implicit val cs = IO.contextShift(ExecutionContext.global)
 
-  val connection = DB.getConnection()
+  val connection = db.database("default").getConnection()
 
-  val xa = Transactor.fromConnection[IO](
-    connection
-  )
+  val xa = Blocker[IO].map { b =>
+    Transactor.fromConnection[IO](connection, b)
+  }
 }
