@@ -17,7 +17,6 @@ lazy val playSettings = Seq(
   )
 )
 
-
 lazy val root = (project in file("."))
   .settings(commonSettings)
   .aggregate(domain, application, adapter)
@@ -47,10 +46,8 @@ lazy val adapter = (project in file("adapter"))
     playSettings,
     name := "librame-adapter",
     libraryDependencies ++= Seq(
-      "org.atnos"             %% "eff" % "5.12.0",
       "com.typesafe.slick"    %% "slick" % "3.3.3",
       "mysql"                  % "mysql-connector-java"  % "5.1.48",
-      "com.mohiva"            %% "play-silhouette-password-bcrypt" % "7.0.0",
       "com.github.karelcemus" %% "play-redis" % "2.6.1",
       "org.tpolecat"          %% "doobie-core" % "0.9.0",
       "org.typelevel"         %% "cats-effect" % "2.2.0",
