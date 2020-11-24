@@ -1,17 +1,18 @@
 package librame.adapter.secondary.rdb
 
+import scala.concurrent.ExecutionContext
+
 import doobie._
 import cats.effect.IO
-import scala.concurrent.ExecutionContext
+import play.api.db.DB
 
 trait DoobieDatabaseConfig {
   
   implicit val cs = IO.contextShift(ExecutionContext.global)
 
-  val xa = Transactor.fromDriverManager[IO](
-    "com.mysql.jdbc.Driver",
-    "jdbc:mysql://127.0.0.1:3306/auth?useSSL=false",
-    "user",
-    "password"
+  val connection = DB.getConnection()
+
+  val xa = Transactor.fromConnection[IO](
+    connection
   )
 }
