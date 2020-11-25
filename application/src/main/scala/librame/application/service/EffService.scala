@@ -3,21 +3,16 @@ package librame.application.service
 import scala.concurrent.{Future, ExecutionContext}
 
 import org.atnos.eff._
-import org.atnos.eff.either._
-import org.atnos.eff.future._
+import org.atnos.eff.Members.&&:
 
+import EffService._
 
-trait EffService {
-  type ServiceEither[T]  = Either[error.ServiceErr, T]
+trait EffService[M[_]] {
+
   type _serviceEither[R] = ServiceEither |= R
-
-  implicit class FutureOps[T](futureValue: Future[T])(implicit ec: ExecutionContext) {
-    def toEff[R: _future]: Eff[R, T] = fromFuture(futureValue)
-  }
-
-  implicit class ServiceEitherOps[T](eitherValue: Either[error.ServiceErr, T])(implicit ec: ExecutionContext) {
-    def toEff[R: _serviceEither]: Eff[R, T] = fromEither(eitherValue)
-  }
+  type _member[R]        = M |= R
 }
 
-object EffService extends EffService
+object EffService {
+  type ServiceEither[T] = Either[error.ServiceErr, T]
+}
