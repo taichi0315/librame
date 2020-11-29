@@ -18,14 +18,6 @@ trait EffService {
 
   type FutureStack = Fx.fx2[ServiceEither, TimedFuture]
 
-  implicit class FutureOps[T](futureValue: Future[T])(implicit ec: ExecutionContext) {
-    def toEff[R: _future]: Eff[R, T] = fromFuture(futureValue)
-  }
-
-  implicit class ServiceEitherOps[T](eitherValue: Either[error.ServiceErr, T])(implicit ec: ExecutionContext) {
-    def toEff[R: _serviceEither]: Eff[R, T] = fromEither(eitherValue)
-  }
-
   implicit class EffFutureStackOps[T](eff: Eff[FutureStack, T])(implicit ec: ExecutionContext) {
     def run: Future[Either[error.ServiceErr, T]] = eff.runEither.runAsync
   }
