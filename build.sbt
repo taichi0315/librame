@@ -6,7 +6,9 @@ ThisBuild / organization     := "librame"
 ThisBuild / organizationName := "librame"
 
 lazy val commonSettings = Seq(
-  resolvers += "Atlassian Releases" at "https://maven.atlassian.com/public/",
+  resolvers ++= Seq(
+    "Atlassian Releases" at "https://maven.atlassian.com/public/",
+  ),
   libraryDependencies ++= Seq(
     scalaTest % Test
   )
@@ -40,7 +42,6 @@ lazy val adapter = (project in file("adapter"))
     commonSettings,
     name := "librame-adapter",
     libraryDependencies ++= Seq(
-      "org.atnos"              %% "eff" % "5.12.0",
       "com.typesafe.slick"     %% "slick" % "3.3.3",
       "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
       "com.github.karelcemus"  %% "play-redis" % "2.6.1",
