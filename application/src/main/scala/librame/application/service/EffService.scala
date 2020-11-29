@@ -1,10 +1,7 @@
 package librame.application.service
 
-import scala.concurrent.{Future, ExecutionContext}
 
 import org.atnos.eff._
-import org.atnos.eff.either._
-import org.atnos.eff.future._
 import org.atnos.eff.syntax.{either, future}
 import org.atnos.eff.concurrent.Scheduler
 

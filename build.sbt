@@ -11,7 +11,10 @@ lazy val commonSettings = Seq(
   ),
   libraryDependencies ++= Seq(
     scalaTest % Test
-  )
+  ),
+  scalacOptions ++= Seq(
+    "-Wunused:imports",
+  ),
 )
 
 lazy val root = (project in file("."))
@@ -48,3 +51,8 @@ lazy val adapter = (project in file("adapter"))
     )
   )
   .dependsOn(domain, application)
+
+// For Scalafix
+ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
+ThisBuild / scalafixDependencies += "com.nequissimus" %% "sort-imports" % "0.5.5"
