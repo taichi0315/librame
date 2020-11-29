@@ -2,8 +2,8 @@ package librame.application.service
 
 
 import org.atnos.eff._
-import org.atnos.eff.syntax.{either, future}
 import org.atnos.eff.concurrent.Scheduler
+import org.atnos.eff.syntax.{either, future}
 
 
 trait EffService extends either with future {
