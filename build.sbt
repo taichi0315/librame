@@ -1,15 +1,20 @@
 import Dependencies._
 
-ThisBuild / scalaVersion     := "2.13.3"
+ThisBuild / scalaVersion     := "2.13.4"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "librame"
 ThisBuild / organizationName := "librame"
 
 lazy val commonSettings = Seq(
-  resolvers += "Atlassian Releases" at "https://maven.atlassian.com/public/",
+  resolvers ++= Seq(
+    "Atlassian Releases" at "https://maven.atlassian.com/public/",
+  ),
   libraryDependencies ++= Seq(
     scalaTest % Test
-  )
+  ),
+  scalacOptions ++= Seq(
+    "-Wunused:imports",
+  ),
 )
 
 lazy val root = (project in file("."))
@@ -40,10 +45,14 @@ lazy val adapter = (project in file("adapter"))
     commonSettings,
     name := "librame-adapter",
     libraryDependencies ++= Seq(
-      "org.atnos"              %% "eff" % "5.12.0",
       "com.typesafe.slick"     %% "slick" % "3.3.3",
       "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
       "com.github.karelcemus"  %% "play-redis" % "2.6.1",
     )
   )
   .dependsOn(domain, application)
+
+// For Scalafix
+ThisBuild / semanticdbEnabled := true
+ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
+ThisBuild / scalafixDependencies += "com.nequissimus" %% "sort-imports" % "0.5.5"
