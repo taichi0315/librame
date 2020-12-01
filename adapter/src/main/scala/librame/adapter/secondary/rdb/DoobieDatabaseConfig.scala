@@ -3,7 +3,7 @@ package librame.adapter.secondary.rdb
 import scala.concurrent.ExecutionContext
 
 import doobie._
-import cats.effect.{IO, Blocker}
+import cats.effect.{IO, Resource, Blocker}
 import play.api.db.DBApi
 
 class DoobieDatabaseConfig(db: DBApi) {
@@ -12,10 +12,11 @@ class DoobieDatabaseConfig(db: DBApi) {
 
   val connection = db.database("default").getConnection()
 
-  val xa = Blocker[IO].map {blocker =>
-    Transactor.fromConnection[IO](
-      connection,
-      blocker
-    )
-  }
+  val xa: Resource[IO, Transactor[IO]] =
+    Blocker[IO].map { blocker =>
+      Transactor.fromConnection[IO](
+        connection,
+        blocker
+      )
+    }
 }
