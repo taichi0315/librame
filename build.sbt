@@ -45,9 +45,10 @@ lazy val adapter = (project in file("adapter"))
     commonSettings,
     name := "librame-adapter",
     libraryDependencies ++= Seq(
-      "com.typesafe.slick"     %% "slick" % "3.3.3",
-      "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
-      "com.github.karelcemus"  %% "play-redis" % "2.6.1",
+      "com.typesafe.slick"    %% "slick" % "3.3.3",
+      "org.tpolecat"          %% "doobie-core" % "0.9.0",
+      "com.github.karelcemus" %% "play-redis" % "2.6.1",
+      "com.typesafe.play"     %% "play-jdbc" % "2.8.2",
     )
   )
   .dependsOn(domain, application)
