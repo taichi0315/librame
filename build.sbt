@@ -36,6 +36,7 @@ lazy val application = (project in file("application"))
     name := "librame-application",
     libraryDependencies ++= Seq(
       "org.atnos" %% "eff" % "5.12.0",
+      "org.atnos" %% "eff-doobie" % "5.12.0",
     )
   )
   .dependsOn(domain)
