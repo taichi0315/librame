@@ -1,7 +1,7 @@
 import Dependencies._
 
 ThisBuild / scalaVersion     := "2.13.4"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
+ThisBuild / version          := "0.2.0-SNAPSHOT"
 ThisBuild / organization     := "librame"
 ThisBuild / organizationName := "librame"
 
@@ -36,6 +36,7 @@ lazy val application = (project in file("application"))
     name := "librame-application",
     libraryDependencies ++= Seq(
       "org.atnos" %% "eff" % "5.12.0",
+      "org.atnos" %% "eff-cats-effect" % "5.12.0",
     )
   )
   .dependsOn(domain)
@@ -45,9 +46,10 @@ lazy val adapter = (project in file("adapter"))
     commonSettings,
     name := "librame-adapter",
     libraryDependencies ++= Seq(
-      "com.typesafe.slick"     %% "slick" % "3.3.3",
-      "com.mohiva"             %% "play-silhouette-password-bcrypt" % "7.0.0",
-      "com.github.karelcemus"  %% "play-redis" % "2.6.1",
+      "com.typesafe.slick"    %% "slick" % "3.3.3",
+      "org.tpolecat"          %% "doobie-core" % "0.9.0",
+      "com.github.karelcemus" %% "play-redis" % "2.6.1",
+      "com.typesafe.play"     %% "play-jdbc" % "2.8.2",
     )
   )
   .dependsOn(domain, application)
