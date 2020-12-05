@@ -2,8 +2,8 @@ package librame.adapter.secondary.rdb
 
 import scala.concurrent.ExecutionContext
 
-import doobie._
 import cats.effect.{IO, Blocker}
+import doobie._
 import play.api.db.DBApi
 
 abstract class DoobieDatabaseConfig(db: DBApi) {
