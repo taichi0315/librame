@@ -10,6 +10,8 @@ import org.atnos.eff.syntax.addon.cats.effect._
 import cats.effect.IO
 
 class EffService()(implicit ec: ExecutionContext) {
+
+  implicit val cs = IO.contextShift(ExecutionContext.global)
   implicit val scheduler: Scheduler = ExecutorServices.schedulerFromGlobalExecutionContext
 
   type ServiceEither[T]  = Either[error.ServiceErr, T]
@@ -17,6 +19,10 @@ class EffService()(implicit ec: ExecutionContext) {
 
   type FutureStack = Fx.fx2[ServiceEither, TimedFuture]
   type IOStack     = Fx.fx2[ServiceEither, IO]
+
+  implicit class FutureOps[T](future: Future[T]) {
+    def toIO: IO[T] = IO.fromFuture(IO(future))
+  }
 
   implicit class FutureStackOps[T](future: Eff[FutureStack, T]) {
     def run: Future[ServiceEither[T]] =
