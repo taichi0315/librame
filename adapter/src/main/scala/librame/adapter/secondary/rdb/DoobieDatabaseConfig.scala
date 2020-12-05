@@ -6,7 +6,7 @@ import doobie._
 import cats.effect.{IO, Blocker}
 import play.api.db.DBApi
 
-class DoobieDatabaseConfig(db: DBApi) {
+abstract class DoobieDatabaseConfig(db: DBApi) {
 
   implicit val cs = IO.contextShift(ExecutionContext.global)
 
