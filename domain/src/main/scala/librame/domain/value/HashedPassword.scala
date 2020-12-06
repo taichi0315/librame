@@ -1,9 +1,9 @@
 package librame.domain.value
 
-import librame.domain.error._
-
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.password.BCryptPasswordHasher
+
+import librame.domain.error._
 
 case class HashedPassword(value: PasswordInfo) extends Value[PasswordInfo] {
   import HashedPassword.passwordHasher
