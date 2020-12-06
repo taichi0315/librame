@@ -1,5 +1,7 @@
 package librame.domain.value
 
+import librame.domain.error._
+
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 
@@ -15,7 +17,7 @@ object HashedPassword {
 
   lazy val passwordHasher = new BCryptPasswordHasher()
 
-  sealed trait ValidateErr
+  sealed trait ValidateErr extends DomainErr
   case object ValidateErr extends ValidateErr
 
   def apply(rawPassword: String): Either[ValidateErr, HashedPassword] =
