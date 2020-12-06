@@ -21,6 +21,7 @@ Scala言語で書かれたWeb開発用ライブラリです。DDDを意識した
 
 ## サンプルコード
 librameを用いたプロジェクトのサンプルコードは以下のリポジトリに実装されています。
+
 [taichi0315/scala-ddd-auth-base](https://github.com/taichi0315/scala-ddd-auth-base)
 
 ## 参考リンク
