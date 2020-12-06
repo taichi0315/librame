@@ -1,15 +1,17 @@
 package librame.domain.value
 
-import librame.domain.error.EmailAddressValidation
-
 case class EmailAddress(value: String) extends Value[String]
 
 object EmailAddress {
+
+  sealed trait ValidateErr
+  case object ValidateErr extends ValidateErr
   
-  def apply(email: String): Either[EmailAddressValidation, EmailAddress] =
-    Either.cond(
-      email.matches("""[a-z0-9]+@[a-z0-9]+\.[a-z0-9]{2,}"""),
-      new EmailAddress(email),
-      EmailAddressValidation
-    )
+  def apply(rawEmail: String): Either[ValidateErr, EmailAddress] =
+    Right(rawEmail)
+      .filterOrElse(isValidate(_), ValidateErr)
+      .map(new EmailAddress(_))
+
+  private def isValidate(rawEmail: String): Boolean =
+    rawEmail.matches("""[a-z0-9]+@[a-z0-9]+\.[a-z0-9]{2,}""")
 }
