@@ -2,12 +2,12 @@ package librame.application.service
 
 import scala.concurrent.{Future, ExecutionContext}
 
+import cats.effect.IO
 import org.atnos.eff._
 import org.atnos.eff.concurrent.Scheduler
+import org.atnos.eff.syntax.addon.cats.effect._
 import org.atnos.eff.syntax.either._
 import org.atnos.eff.syntax.future._
-import org.atnos.eff.syntax.addon.cats.effect._
-import cats.effect.IO
 
 class EffService()(implicit ec: ExecutionContext) {
 
