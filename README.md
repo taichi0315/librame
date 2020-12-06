@@ -18,6 +18,8 @@ Scala言語で書かれたWeb開発用ライブラリです。DDDを意識した
     - Play Redis
 - Primary Adapter Layer
   - Play Framework
+- Others
+  - Scalafix
 
 ## サンプルコード
 librameを用いたプロジェクトのサンプルコードは以下のリポジトリに実装されています。
