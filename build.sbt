@@ -46,6 +46,7 @@ lazy val adapter = (project in file("adapter"))
     commonSettings,
     name := "librame-adapter",
     libraryDependencies ++= Seq(
+      "mysql"                 % "mysql-connector-java"  % "5.1.48",
       "com.typesafe.slick"    %% "slick" % "3.3.3",
       "org.tpolecat"          %% "doobie-core" % "0.9.0",
       "com.github.karelcemus" %% "play-redis" % "2.6.1",
