@@ -1,4 +1,4 @@
-package librame.adapter.primary.auth
+package librame.adapter.primary.authentication
 
 import scala.concurrent.{Future, ExecutionContext}
 
@@ -6,17 +6,17 @@ import play.api.mvc._
 
 import librame.domain.model.EntityId
 
-trait AuthExtension[T <: EntityId] {self: BaseControllerHelpers =>
+trait AuthenticateExtension[T <: EntityId] {self: BaseControllerHelpers =>
   
   import ExecutionContext.Implicits.global
 
 
-  def AuthAction(authProfile: AuthProfile[T]): ActionBuilder[Request, AnyContent] =
-    AuthActionBuilder[T](authProfile, parse.default)
+  def AuthenticateAction(authProfile: AuthenticationProfile[T]): ActionBuilder[Request, AnyContent] =
+    AuthenticateActionBuilder[T](authProfile, parse.default)
 }
 
-case class AuthActionBuilder[T <: EntityId](
-  auth:  AuthProfile[T],
+case class AuthenticateActionBuilder[T <: EntityId](
+  auth:  AuthenticationProfile[T],
   parse: BodyParser[AnyContent]
 ) (implicit ec: ExecutionContext)
 extends ActionBuilderImpl(parse) {

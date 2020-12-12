@@ -1,8 +1,8 @@
-package librame.adapter.primary.auth
+package librame.adapter.primary.authentication
 
 import play.api.mvc._
 
-abstract class AuthSession {
+abstract class AuthenticationSession {
 
   val key:    String
   val maxAge: Option[Int]
