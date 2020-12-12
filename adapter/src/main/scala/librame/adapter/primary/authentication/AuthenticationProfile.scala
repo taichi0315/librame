@@ -1,4 +1,4 @@
-package librame.adapter.primary.auth
+package librame.adapter.primary.authentication
 
 import java.util.UUID
 
@@ -12,17 +12,17 @@ import play.api.mvc._
 import librame.adapter.secondary.kvs.CacheRepository
 import librame.domain.model._
 
-abstract class AuthProfile[T <: EntityId]() (implicit ec: ExecutionContext) {
+abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionContext) {
 
   object AttrKeys {
     val Auth: TypedKey[T] = TypedKey("Authentication")
   }
 
-  val Unauthorized: Result = Status(401).apply("unauthorized user")
+  val Unauthorized: Result = Status(401).apply("unauthorized")
 
   val sessionTimeout: Duration
 
-  val sessionToken: AuthSession
+  val sessionToken: AuthenticationSession
 
   val dataStore: CacheRepository[T]
   
