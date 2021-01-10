@@ -1,17 +1,11 @@
 package librame.domain.value
 
-import librame.domain.error._
-
 case class EmailAddress(value: String) extends SingleValueObject[String]
 
 object EmailAddress {
-
-  sealed trait ValidateErr extends DomainErr
-  case object ValidateErr extends ValidateErr
-  
-  def apply(rawEmail: String): Either[ValidateErr, EmailAddress] =
+  def apply(rawEmail: String): Either[Unit, EmailAddress] =
     Right(rawEmail)
-      .filterOrElse(isValidate(_), ValidateErr)
+      .filterOrElse(isValidate(_), ())
       .map(new EmailAddress(_))
 
   private def isValidate(rawEmail: String): Boolean =

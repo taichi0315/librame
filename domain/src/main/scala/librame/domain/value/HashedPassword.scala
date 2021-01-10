@@ -3,8 +3,6 @@ package librame.domain.value
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 
-import librame.domain.error._
-
 case class HashedPassword(value: String) extends SingleValueObject[String] {
   import HashedPassword.passwordHasher
 
@@ -17,12 +15,9 @@ object HashedPassword {
 
   lazy val passwordHasher = new BCryptPasswordHasher()
 
-  sealed trait ValidateErr extends DomainErr
-  case object ValidateErr extends ValidateErr
-
-  def apply(rawPassword: String): Either[ValidateErr, HashedPassword] =
+  def apply(rawPassword: String): Either[Unit, HashedPassword] =
     Right(rawPassword)
-      .filterOrElse(isValidate(_), ValidateErr)
+      .filterOrElse(isValidate(_), ())
       .map(raw => new HashedPassword(passwordHasher.hash(raw).password))
 
   private def isValidate(password: String): Boolean =
