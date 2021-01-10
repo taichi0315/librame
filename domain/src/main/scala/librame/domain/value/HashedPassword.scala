@@ -15,11 +15,10 @@ object HashedPassword {
 
   lazy val passwordHasher = new BCryptPasswordHasher()
 
-  def apply(rawPassword: String): Either[Unit, HashedPassword] =
-    Right(rawPassword)
+  def apply(value: String): Either[Unit, HashedPassword] =
+    Right(value)
       .filterOrElse(isValidate(_), ())
-      .map(raw => new HashedPassword(passwordHasher.hash(raw).password))
+      .map(v => new HashedPassword(passwordHasher.hash(v).password))
 
-  private def isValidate(password: String): Boolean =
-    password.length >= 8
+  private def isValidate(value: String): Boolean = value.length >= 8
 }
