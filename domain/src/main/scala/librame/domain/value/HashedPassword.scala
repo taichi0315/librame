@@ -5,7 +5,7 @@ import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 
 import librame.domain.error._
 
-case class HashedPassword(value: PasswordInfo) extends Value[PasswordInfo] {
+case class HashedPassword(value: PasswordInfo) extends SingleValueObject[PasswordInfo] {
   import HashedPassword.passwordHasher
 
 

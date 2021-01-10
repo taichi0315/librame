@@ -2,7 +2,7 @@ package librame.domain.value
 
 import librame.domain.error._
 
-case class EmailAddress(value: String) extends Value[String]
+case class EmailAddress(value: String) extends SingleValueObject[String]
 
 object EmailAddress {
 
