@@ -4,7 +4,7 @@ import org.scalatest.FunSuite
 
 class CurrencyTest extends FunSuite {
 
-  test("失敗") {
+  test("生成失敗") {
     assert(Currency("AB").isLeft)
     assert(Currency("ABCD").isLeft)
     assert(Currency("AAAAAAAAAAAAAAA").isLeft)
@@ -12,7 +12,7 @@ class CurrencyTest extends FunSuite {
     assert(Currency("jpY").isLeft)
   }
 
-  test("成功") {
+  test("生成成功") {
     assert(Currency("JPY").isRight)
     assert(Currency("USD").isRight)
     assert(Currency("EUR").isRight)
