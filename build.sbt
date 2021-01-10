@@ -1,7 +1,7 @@
 import Dependencies._
 
 ThisBuild / scalaVersion     := "2.13.4"
-ThisBuild / version          := "0.2.0-SNAPSHOT"
+ThisBuild / version          := "0.3.0-SNAPSHOT"
 ThisBuild / organization     := "librame"
 ThisBuild / organizationName := "librame"
 
@@ -19,7 +19,7 @@ lazy val commonSettings = Seq(
 
 lazy val root = (project in file("."))
   .settings(commonSettings)
-  .aggregate(domain, application, adapter)
+  .aggregate(domain, usecase, adapter)
 
 lazy val domain = (project in file("domain"))
   .settings(
@@ -30,10 +30,10 @@ lazy val domain = (project in file("domain"))
     )
   )
 
-lazy val application = (project in file("application"))
+lazy val usecase = (project in file("usecase"))
   .settings(
     commonSettings,
-    name := "librame-application",
+    name := "librame-usecase",
     libraryDependencies ++= Seq(
       "org.atnos" %% "eff" % "5.12.0",
       "org.atnos" %% "eff-cats-effect" % "5.12.0",
@@ -53,7 +53,7 @@ lazy val adapter = (project in file("adapter"))
       "com.typesafe.play"     %% "play-jdbc" % "2.8.2",
     )
   )
-  .dependsOn(domain, application)
+  .dependsOn(domain, usecase)
 
 // For Scalafix
 ThisBuild / semanticdbEnabled := true

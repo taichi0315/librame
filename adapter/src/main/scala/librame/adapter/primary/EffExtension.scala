@@ -9,22 +9,22 @@ import org.atnos.eff.syntax.addon.cats.effect._
 import org.atnos.eff.syntax.either._
 import org.atnos.eff.syntax.future._
 
-import librame.application.service.EffService.ServiceEither
+import librame.usecase.EffUsecase.UsecaseEither
 
 class EffExtension()(implicit ec: ExecutionContext)
   extends {
   implicit val scheduler: Scheduler = ExecutorServices.schedulerFromGlobalExecutionContext
 
-  type FutureStack = Fx.fx2[ServiceEither, TimedFuture]
-  type IOStack     = Fx.fx2[ServiceEither, IO]
+  type FutureStack = Fx.fx2[UsecaseEither, TimedFuture]
+  type IOStack     = Fx.fx2[UsecaseEither, IO]
 
   implicit class FutureStackOps[T](future: Eff[FutureStack, T]) {
-    def run: Future[ServiceEither[T]] =
+    def run: Future[UsecaseEither[T]] =
       future.runEither.runAsync
   }
 
   implicit class IOStackOps[T](io: Eff[IOStack, T]) {
-    def run: Future[ServiceEither[T]] =
+    def run: Future[UsecaseEither[T]] =
       io.runEither.unsafeToFuture
   }
 }

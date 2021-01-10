@@ -6,7 +6,7 @@ Scala言語で書かれたWeb開発用ライブラリです。DDDを意識した
 - Domain Layer
   - Password Hash
     - Silhouette
-- Application Service Layer
+- Usecase Layer
   - Extensible effects
     - Eff
     - Eff Cats Effect
