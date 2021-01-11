@@ -1,4 +1,4 @@
-package librame.domain.value
+package librame.domain.value.market
 
 import java.lang.AssertionError
 

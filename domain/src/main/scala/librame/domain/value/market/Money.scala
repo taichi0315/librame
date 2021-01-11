@@ -1,4 +1,4 @@
-package librame.domain.value
+package librame.domain.value.market
 
 import scala.math.BigDecimal
 
@@ -39,11 +39,4 @@ object Money {
     Right(value)
       .filterOrElse(_ >= 0, ())
       .map(v => new Money(v, currency))
-}
-
-abstract class Currency(val code: String)
-
-object Currency {
-  case object JPY extends Currency("JPY")
-  case object USD extends Currency("USD")
 }
