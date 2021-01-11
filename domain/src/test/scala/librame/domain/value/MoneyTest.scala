@@ -28,8 +28,10 @@ class MoneyTest extends FunSuite {
       m1     <- Money(3)
       m2     <- Money(2)
       except <- Money(5)
-    } yield
+    } yield {
+      assert(m1 + m2 == except)
       assert(m1.plus(m2) == except)
+    }
   }
   
   test("引き算") {
@@ -37,8 +39,10 @@ class MoneyTest extends FunSuite {
       m1     <- Money(4)
       m2     <- Money(3)
       except <- Money(1)
-    } yield
+    } yield {
+      assert(m1 - m2 == except)
       assert(m1.minus(m2) == except)
+    }
   }
 
   test("引き算失敗") {
@@ -55,8 +59,11 @@ class MoneyTest extends FunSuite {
     for {
       m1     <- Money(3)
       except <- Money(9)
-    } yield
+    } yield {
+      assert(m1 * 3 == except)
       assert(m1.mul(3) == except)
+
+    }
   }
 
   test("掛け算失敗") {
@@ -72,8 +79,10 @@ class MoneyTest extends FunSuite {
     for {
       m1     <- Money(9)
       except <- Money(3)
-    } yield
+    } yield {
+      assert(m1 / 3 == except)
       assert(m1.div(3) == except)
+    }
   }
 
   test("割り算失敗①") {
