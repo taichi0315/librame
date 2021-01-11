@@ -1,29 +1,27 @@
 package librame.domain.value
 
+import java.lang.AssertionError
+
 import scala.util.Try
 
 import org.scalatest.FunSuite
 
 class MoneyTest extends FunSuite {
 
-  test("正常") {
+  test("生成：正常") {
     assert(Money(0).isRight)
     assert(Money(1).isRight)
     assert(Money(100).isRight)
     assert(Money(0.1).isRight)
   }
 
-  test("0より小さい") {
+  test("生成：0より小さい") {
     assert(Money(-1).isLeft)
     assert(Money(-100).isLeft)
     assert(Money(-0.1).isLeft)
   }
 
-  test("USD通貨") {
-    assert(Money(1, "USD").isRight)
-  }
-
-  test("足し算") {
+  test("plus method success") {
     for {
       m1     <- Money(3)
       m2     <- Money(2)
@@ -33,8 +31,22 @@ class MoneyTest extends FunSuite {
       assert(m1.plus(m2) == except)
     }
   }
+
+  test("plus method exception") {
+    val result = for {
+      m1     <- Money(3, Currency.JPY)
+      m2     <- Money(2, Currency.USD)
+      result <- Try(m1 + m2).toEither
+    } yield result
+
+    assert(result.isLeft)
+    result.left.map {
+      case _: UnsupportedOperationException => succeed
+      case _                                => fail()
+    }
+  }
   
-  test("引き算") {
+  test("minus method success") {
     for {
       m1     <- Money(4)
       m2     <- Money(3)
@@ -45,37 +57,58 @@ class MoneyTest extends FunSuite {
     }
   }
 
-  test("引き算失敗") {
+  test("minus method ensuring") {
     val result = for {
       m1     <- Money(3)
       m2     <- Money(4)
-      result <- Try(m1.minus(m2)).toEither
+      result <- Try(m1 - m2).toEither
     } yield result
 
     assert(result.isLeft)
+    result.left.map {
+      case _: AssertionError => succeed
+      case _                 => fail()
+    }
   }
 
-  test("掛け算") {
+  test("minus method exception") {
+    val result = for {
+      m1     <- Money(3, Currency.JPY)
+      m2     <- Money(2, Currency.USD)
+      result <- Try(m1 - m2).toEither
+    } yield result
+
+    assert(result.isLeft)
+    result.left.map {
+      case _: UnsupportedOperationException => succeed
+      case _                                => fail()
+    }
+  }
+
+  test("mul method success") {
     for {
       m1     <- Money(3)
       except <- Money(9)
     } yield {
       assert(m1 * 3 == except)
       assert(m1.mul(3) == except)
-
     }
   }
 
-  test("掛け算失敗") {
+  test("mul method require") {
     val result = for {
       m1     <- Money(3)
-      result <- Try(m1.mul(-1)).toEither
+      result <- Try(m1 * -1).toEither
     } yield result
 
     assert(result.isLeft)
+    result.left.map {
+      case _: IllegalArgumentException => succeed
+      case _                           => fail()
+    }
   }
 
-  test("割り算") {
+  test("div method success") {
     for {
       m1     <- Money(9)
       except <- Money(3)
@@ -85,21 +118,29 @@ class MoneyTest extends FunSuite {
     }
   }
 
-  test("割り算失敗①") {
+  test("div method require 1") {
     val result = for {
       m1     <- Money(3)
-      result <- Try(m1.div(-1)).toEither
+      result <- Try(m1 / -1).toEither
     } yield result
 
     assert(result.isLeft)
+    result.left.map {
+      case _: IllegalArgumentException => succeed
+      case _                           => fail()
+    }
   }
 
-  test("割り算失敗②") {
+  test("div method require 2") {
     val result = for {
       m1     <- Money(3)
-      result <- Try(m1.div(0)).toEither
+      result <- Try(m1 / 0).toEither
     } yield result
 
     assert(result.isLeft)
+    result.left.map {
+      case _: IllegalArgumentException => succeed
+      case _                           => fail()
+    }
   }
 }

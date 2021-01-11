@@ -2,8 +2,6 @@ package librame.domain.value
 
 import scala.math.BigDecimal
 
-import librame.domain.error.DomainErr
-
 case class Money(
   value:    BigDecimal,
   currency: Currency
@@ -37,16 +35,15 @@ case class Money(
 }
 
 object Money {
-  def apply(value: BigDecimal, rawCurrency: String = "JPY"): Either[DomainErr, Money] =
-    for { 
-      currency <- Currency(rawCurrency).left.map(_ => CurrencyValidateErr)
-      money    <- Right(value)
-        .filterOrElse(isValidate(_), MoneyValidateErr)
-        .map(v => new Money(v, currency))
-    } yield money
+  def apply(value: BigDecimal, currency: Currency = Currency.JPY): Either[Unit, Money] =
+    Right(value)
+      .filterOrElse(_ >= 0, ())
+      .map(v => new Money(v, currency))
+}
 
-  private def isValidate(value: BigDecimal): Boolean = value >= 0
+abstract class Currency(val code: String)
 
-  case object CurrencyValidateErr extends DomainErr
-  case object MoneyValidateErr    extends DomainErr
+object Currency {
+  case object JPY extends Currency("JPY")
+  case object USD extends Currency("USD")
 }
