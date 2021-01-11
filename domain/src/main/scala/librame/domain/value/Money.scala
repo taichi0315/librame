@@ -2,24 +2,32 @@ package librame.domain.value
 
 import scala.math.BigDecimal
 
-import librame.domain.error.DomainErr
-
 case class Money(
   value:    BigDecimal,
   currency: Currency
 ) {
-  def plus(other: Money): Money =
-    this.copy(value = this.value + other.value)
+  def +(that: Money): Money = plus(that)
+  def plus(that: Money): Money =
+    that.currency match {
+      case this.currency => this.copy(value = this.value + that.value)
+      case _             => throw new UnsupportedOperationException("plus not supported for cross-currency comparison")
+    }
 
-  def minus(other: Money): Money = {
-    this.copy(value = this.value - other.value)
+  def -(that: Money): Money = minus(that)
+  def minus(that: Money): Money = {
+    that.currency match {
+      case this.currency => this.copy(value = this.value - that.value)
+      case _             => throw new UnsupportedOperationException("minus not supported for cross-currency comparison")
+    }
   } ensuring(_.value >= 0, "金額が0以上")
 
+  def *(factor: BigDecimal): Money = mul(factor)
   def mul(factor: BigDecimal): Money = {
     require(factor >= 0, "掛ける値は0以上")
     this.copy(value = this.value * factor)
   }
 
+  def /(factor: BigDecimal): Money = div(factor)
   def div(factor: BigDecimal): Money = {
     require(factor > 0, "割る値は0より大きい")
     this.copy(value = this.value / factor)
@@ -27,16 +35,15 @@ case class Money(
 }
 
 object Money {
-  def apply(value: BigDecimal, rawCurrency: String = "JPY"): Either[DomainErr, Money] =
-    for { 
-      currency <- Currency(rawCurrency).left.map(_ => CurrencyValidateErr)
-      money    <- Right(value)
-        .filterOrElse(isValidate(_), MoneyValidateErr)
-        .map(v => new Money(v, currency))
-    } yield money
+  def apply(value: BigDecimal, currency: Currency = Currency.JPY): Either[Unit, Money] =
+    Right(value)
+      .filterOrElse(_ >= 0, ())
+      .map(v => new Money(v, currency))
+}
 
-  private def isValidate(value: BigDecimal): Boolean = value >= 0
+abstract class Currency(val code: String)
 
-  case object CurrencyValidateErr extends DomainErr
-  case object MoneyValidateErr    extends DomainErr
+object Currency {
+  case object JPY extends Currency("JPY")
+  case object USD extends Currency("USD")
 }
