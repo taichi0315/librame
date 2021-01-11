@@ -1,9 +1,9 @@
 package librame.domain.value.market
 
-case class SalesTax(
+case class Price(
   money: Money
 ) {
   val SALES_TAX_RATE = 0.1
 
-  lazy val calculate: Money = money * SALES_TAX_RATE
+  lazy val tax: Money = money * SALES_TAX_RATE
 }
