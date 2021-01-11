@@ -17,8 +17,6 @@ object HashedPassword {
 
   def apply(value: String): Either[Unit, HashedPassword] =
     Right(value)
-      .filterOrElse(isValidate(_), ())
+      .filterOrElse(_.length >= 8, ())
       .map(v => new HashedPassword(passwordHasher.hash(v).password))
-
-  private def isValidate(value: String): Boolean = value.length >= 8
 }
