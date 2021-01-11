@@ -8,11 +8,11 @@ case class Money(
   value:    BigDecimal,
   currency: Currency
 ) {
-  def plus(other: Money): Money =
-    this.copy(value = this.value + other.value)
+  def plus(that: Money): Money =
+    this.copy(value = this.value + that.value)
 
-  def minus(other: Money): Money = {
-    this.copy(value = this.value - other.value)
+  def minus(that: Money): Money = {
+    this.copy(value = this.value - that.value)
   } ensuring(_.value >= 0, "金額が0以上")
 
   def mul(factor: BigDecimal): Money = {
