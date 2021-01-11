@@ -9,10 +9,16 @@ case class Money(
   currency: Currency
 ) {
   def plus(that: Money): Money =
-    this.copy(value = this.value + that.value)
+    that.currency match {
+      case this.currency => this.copy(value = this.value + that.value)
+      case _             => throw new UnsupportedOperationException("plus not supported for cross-currency comparison")
+    }
 
   def minus(that: Money): Money = {
-    this.copy(value = this.value - that.value)
+    that.currency match {
+      case this.currency => this.copy(value = this.value - that.value)
+      case _             => throw new UnsupportedOperationException("minus not supported for cross-currency comparison")
+    }
   } ensuring(_.value >= 0, "金額が0以上")
 
   def mul(factor: BigDecimal): Money = {
