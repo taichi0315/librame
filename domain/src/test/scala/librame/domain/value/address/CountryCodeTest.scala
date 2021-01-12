@@ -10,8 +10,8 @@ class CountryCodeTest extends FunSuite {
   }
 
   test("fail") {
+    assert(CountryCode("").isLeft)
     assert(CountryCode("+81").isLeft)
     assert(CountryCode("テスト").isLeft)
-    assert(CountryCode("").isLeft)
   }
 }
