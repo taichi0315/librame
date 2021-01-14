@@ -6,10 +6,10 @@ import org.scalatest.FunSuite
 class EntityIdTest extends FunSuite {
   
   test("違う型の場合等しくない") {
-    case class EntityA(id: EntityA.Id) extends Entity
+    case class EntityA(id: EntityA.Id)
     object EntityA { case class Id(value: UUID) extends EntityId }
 
-    case class EntityB(id: EntityB.Id) extends Entity
+    case class EntityB(id: EntityB.Id)
     object EntityB { case class Id(value: UUID) extends EntityId }
 
     val entityA: EntityA =
@@ -22,7 +22,7 @@ class EntityIdTest extends FunSuite {
   }
 
   test("同じ型でIdの値が等しくない") {
-    case class EntityA(id: EntityA.Id) extends Entity
+    case class EntityA(id: EntityA.Id)
     object EntityA { case class Id(value: UUID) extends EntityId }
 
     val entity1: EntityA =
@@ -35,7 +35,7 @@ class EntityIdTest extends FunSuite {
   }
 
   test("同じ型でIdの値が等しい") {
-    case class EntityA(id: EntityA.Id) extends Entity
+    case class EntityA(id: EntityA.Id)
     object EntityA { case class Id(value: UUID) extends EntityId }
 
     val entity1: EntityA =
