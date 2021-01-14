@@ -1,4 +1,4 @@
-package librame.domain.model
+package librame.domain.value
 
 import java.util.UUID
 import org.scalatest.FunSuite
