@@ -10,7 +10,7 @@ import play.api.mvc.Results.Status
 import play.api.mvc._
 
 import librame.adapter.secondary.kvs.CacheRepository
-import librame.domain.model._
+import librame.domain.value.EntityId
 
 abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionContext) {
 
