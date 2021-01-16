@@ -4,7 +4,7 @@ import scala.concurrent.{Future, ExecutionContext}
 
 import play.api.mvc._
 
-import librame.domain.value.EntityId
+import librame.domain.model.EntityId
 
 trait AuthenticateExtension[T <: EntityId] {self: BaseControllerHelpers =>
   

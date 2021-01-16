@@ -4,7 +4,7 @@ import java.util.UUID
 
 import scala.concurrent.Future
 
-import librame.domain.value.EmailAddress
+import librame.domain.model.EmailAddress
 
 class MockMailerRepository extends MailerRepository {
   def send(to: EmailAddress): Future[Option[String]] = {

@@ -1,4 +1,4 @@
-package librame.domain.value
+package librame.domain.model
 
 case class EmailAddress(value: String) extends SingleValueObject[String]
 

@@ -1,4 +1,4 @@
-package librame.domain.value.address
+package librame.domain.model.address
 
 import org.scalatest.FunSuite
 

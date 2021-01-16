@@ -4,7 +4,7 @@ import java.util.UUID
 
 import scala.reflect.ClassTag
 
-import librame.domain.value.SingleValueObject
+import librame.domain.model.SingleValueObject
 
 
 trait SlickCustomColumnType extends SlickDatabaseConfig {
