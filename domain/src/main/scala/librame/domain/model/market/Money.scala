@@ -1,4 +1,4 @@
-package librame.domain.value.market
+package librame.domain.model.market
 
 import scala.math.BigDecimal
 

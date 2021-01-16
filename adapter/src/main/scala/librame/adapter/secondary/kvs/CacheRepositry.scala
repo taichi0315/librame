@@ -3,7 +3,7 @@ package librame.adapter.secondary.kvs
 import scala.concurrent.Future
 import scala.concurrent.duration.Duration
 
-import librame.domain.value.EntityId
+import librame.domain.model.EntityId
 
 trait CacheRepository[T <: EntityId] {
 

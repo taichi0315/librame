@@ -8,7 +8,7 @@ import scala.reflect.ClassTag
 
 import play.api.cache.redis.CacheAsyncApi
 
-import librame.domain.value.EntityId
+import librame.domain.model.EntityId
 
 class PlayRedisRepository[T <: EntityId : ClassTag](
   cache: CacheAsyncApi

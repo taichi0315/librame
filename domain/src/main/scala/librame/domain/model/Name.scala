@@ -1,4 +1,4 @@
-package librame.domain.value
+package librame.domain.model
 
 case class Name(
   lastName:  String,

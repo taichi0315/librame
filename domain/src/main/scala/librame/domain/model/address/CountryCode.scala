@@ -1,6 +1,6 @@
-package librame.domain.value.address
+package librame.domain.model.address
 
-import librame.domain.value.SingleValueObject
+import librame.domain.model.SingleValueObject
 
 case class CountryCode(value: String) extends SingleValueObject[String]
 

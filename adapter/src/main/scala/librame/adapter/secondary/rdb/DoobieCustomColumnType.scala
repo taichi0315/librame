@@ -6,7 +6,7 @@ import scala.reflect.ClassTag
 
 import doobie.util._
 
-import librame.domain.value._
+import librame.domain.model._
 
 trait DoobieCustomColumnType {
 
