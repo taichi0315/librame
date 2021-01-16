@@ -26,7 +26,8 @@ lazy val domain = (project in file("domain"))
     commonSettings,
     name := "librame-domain",
     libraryDependencies ++= Seq(
-      "com.mohiva" %% "play-silhouette-password-bcrypt" % "7.0.0",
+      "org.typelevel" %% "cats-core" % "2.3.1",
+      "com.mohiva" %% "play-silhouette-password-bcrypt" % "7.0.0"
     )
   )
 
