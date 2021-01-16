@@ -2,6 +2,8 @@ package librame.domain.model.market
 
 import scala.math.BigDecimal
 
+import cats.Monoid
+
 case class Money(
   value:    BigDecimal,
   currency: Currency
@@ -39,4 +41,10 @@ object Money {
     Right(value)
       .filterOrElse(_ >= 0, ())
       .map(v => new Money(v, currency))
+
+  implicit val moneyAdditionMonoid: Monoid[Money] = new Monoid[Money] {
+    def empty: Money = new Money(0, Currency.JPY)
+
+    def combine(x: Money, y: Money): Money = x + y
+  }
 }
