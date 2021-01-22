@@ -1,8 +1,17 @@
 package librame.domain.model
 
+/**
+ * Email Address Value Object
+ * @param value
+ */
 case class EmailAddress(value: String) extends SingleValueObject[String]
 
 object EmailAddress {
+  /**
+   * Constructor
+   * @param value
+   * @return
+   */
   def apply(value: String): Either[Unit, EmailAddress] =
     Right(value)
       .filterOrElse(_.matches(EMAIL_REGEX), ())

@@ -2,6 +2,14 @@ package librame.domain.model.address
 
 import librame.domain.error.DomainErr
 
+/**
+ * Address Value Object
+ * @param countryCode
+ * @param zipCode
+ * @param city
+ * @param address1
+ * @param address2
+ */
 case class Address(
   countryCode: CountryCode,
   zipCode:     ZipCode,
@@ -11,6 +19,15 @@ case class Address(
 )
 
 object Address {
+  /**
+   * Constructor
+   * @param rawCountryCode
+   * @param rawZipCode
+   * @param city
+   * @param address1
+   * @param address2
+   * @return
+   */
   def apply(
     rawCountryCode: String,
     rawZipCode:     String,
