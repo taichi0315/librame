@@ -2,6 +2,7 @@ package librame.domain.model
 
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.password.BCryptPasswordHasher
+
 import librame.domain.error.DomainErr
 
 /**
