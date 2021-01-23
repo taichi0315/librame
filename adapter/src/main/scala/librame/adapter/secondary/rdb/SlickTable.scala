@@ -4,4 +4,11 @@ import SlickDatabaseConfig.profile
 import slick.lifted.Tag
 
 
-abstract class SlickTable[M](tag: Tag, tableName: String) extends profile.Table[M](tag, tableName) with SlickCustomColumnType
+/**
+ * @param tag
+ * @param tableName
+ * @tparam M
+ */
+abstract class SlickTable[M](tag: Tag, tableName: String)
+  extends profile.Table[M](tag, tableName)
+  with SlickCustomColumnType

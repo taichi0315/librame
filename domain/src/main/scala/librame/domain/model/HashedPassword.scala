@@ -5,8 +5,6 @@ import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 import librame.domain.error.DomainErr
 
 /**
- * Hashed Password Value Object
- *
  * @param value
  */
 case class HashedPassword(value: String) extends SingleValueObject[String] {
@@ -23,8 +21,6 @@ object HashedPassword {
   lazy val passwordHasher = new BCryptPasswordHasher()
 
   /**
-   * Constructor
-   *
    * @param value
    * @return
    */

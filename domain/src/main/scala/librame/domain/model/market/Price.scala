@@ -1,8 +1,6 @@
 package librame.domain.model.market
 
 /**
- * Price Value Object
- *
  * @param money
  */
 case class Price(
@@ -10,8 +8,5 @@ case class Price(
 ) {
   val SALES_TAX_RATE = 0.1
 
-  /**
-   * Calculate Tax
-   */
   lazy val tax: Money = money * SALES_TAX_RATE
 }

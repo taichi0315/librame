@@ -3,8 +3,6 @@ package librame.domain.model.address
 import librame.domain.error.DomainErr
 
 /**
- * Address Value Object
- *
  * @param countryCode
  * @param zipCode
  * @param city
@@ -21,8 +19,6 @@ case class Address(
 
 object Address {
   /**
-   * Constructor
-   *
    * @param rawCountryCode
    * @param rawZipCode
    * @param city

@@ -1,7 +1,6 @@
 package librame.domain.model
 
 /**
- * Name Value Object
  * @param lastName
  * @param firstName
  */

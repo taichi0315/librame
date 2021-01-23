@@ -5,8 +5,6 @@ import scala.math.BigDecimal
 import cats.Monoid
 
 /**
- * Money Value Obejct
- *
  * @param value
  * @param currency
  */
@@ -15,8 +13,6 @@ case class Money(
   currency: Currency
 ) {
   /**
-   * plus methods
-   *
    * @param that
    * @return
    */
@@ -28,8 +24,6 @@ case class Money(
     }
 
   /**
-   * minus methods
-   *
    * @param that
    * @return
    */
@@ -42,8 +36,6 @@ case class Money(
   } ensuring(_.value >= 0, "金額が0以上")
 
   /**
-   * mul methods
-   *
    * @param factor
    * @return
    */
@@ -54,8 +46,6 @@ case class Money(
   }
 
   /**
-   * div methods
-   *
    * @param factor
    * @return
    */
@@ -68,8 +58,6 @@ case class Money(
 
 object Money {
   /**
-   * Constructor
-   *
    * @param value
    * @param currency
    * @return
@@ -79,10 +67,7 @@ object Money {
       .filterOrElse(_ >= 0, ())
       .map(v => new Money(v, currency))
 
-  /**
-   * implicit value for Monoid
-   */
-  implicit val moneyAdditionMonoid: Monoid[Money] = new Monoid[Money] {
+  implicit val moneyMonoid: Monoid[Money] = new Monoid[Money] {
     def empty: Money = new Money(0, Currency.JPY)
 
     def combine(x: Money, y: Money): Money = x + y

@@ -3,16 +3,12 @@ package librame.domain.model.address
 import librame.domain.model.SingleValueObject
 
 /**
- * Country Code Value Object
- *
  * @param value
  */
 case class CountryCode(value: String) extends SingleValueObject[String]
 
 object CountryCode {
   /**
-   * Constructor
-   *
    * @param value
    * @return
    */
