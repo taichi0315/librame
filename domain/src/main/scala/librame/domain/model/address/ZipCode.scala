@@ -4,6 +4,7 @@ import librame.domain.model.SingleValueObject
 
 /**
  * Zip Code Value Object
+ *
  * @param value
  */
 case class ZipCode(value: String) extends SingleValueObject[String]
@@ -11,6 +12,7 @@ case class ZipCode(value: String) extends SingleValueObject[String]
 object ZipCode {
   /**
    * Constructor
+   *
    * @param value
    * @return
    */

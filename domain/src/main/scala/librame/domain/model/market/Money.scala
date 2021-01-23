@@ -6,6 +6,7 @@ import cats.Monoid
 
 /**
  * Money Value Obejct
+ *
  * @param value
  * @param currency
  */
@@ -15,6 +16,7 @@ case class Money(
 ) {
   /**
    * plus methods
+   *
    * @param that
    * @return
    */
@@ -27,6 +29,7 @@ case class Money(
 
   /**
    * minus methods
+   *
    * @param that
    * @return
    */
@@ -40,6 +43,7 @@ case class Money(
 
   /**
    * mul methods
+   *
    * @param factor
    * @return
    */
@@ -51,6 +55,7 @@ case class Money(
 
   /**
    * div methods
+   *
    * @param factor
    * @return
    */
@@ -64,6 +69,7 @@ case class Money(
 object Money {
   /**
    * Constructor
+   *
    * @param value
    * @param currency
    * @return

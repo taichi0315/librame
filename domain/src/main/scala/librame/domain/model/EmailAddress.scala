@@ -2,6 +2,7 @@ package librame.domain.model
 
 /**
  * Email Address Value Object
+ *
  * @param value
  */
 case class EmailAddress(value: String) extends SingleValueObject[String]
@@ -9,6 +10,7 @@ case class EmailAddress(value: String) extends SingleValueObject[String]
 object EmailAddress {
   /**
    * Constructor
+   *
    * @param value
    * @return
    */

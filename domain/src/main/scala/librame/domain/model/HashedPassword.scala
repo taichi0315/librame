@@ -2,14 +2,15 @@ package librame.domain.model
 
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.password.BCryptPasswordHasher
-
 import librame.domain.error.DomainErr
 
 /**
  * Hashed Password Value Object
+ *
  * @param value
  */
 case class HashedPassword(value: String) extends SingleValueObject[String] {
+
   import HashedPassword.passwordHasher
 
 
@@ -23,6 +24,7 @@ object HashedPassword {
 
   /**
    * Constructor
+   *
    * @param value
    * @return
    */
@@ -36,4 +38,5 @@ object HashedPassword {
 
   case object LengthErr extends DomainErr
   case object RegexErr  extends DomainErr
+
 }
