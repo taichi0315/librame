@@ -11,8 +11,10 @@ import org.atnos.eff.syntax.future._
 
 import librame.usecase.EffUseCase.UseCaseEither
 
-class EffExtension()(implicit ec: ExecutionContext)
-  extends {
+/**
+ * @param ec
+ */
+class EffExtension()(implicit ec: ExecutionContext) extends {
   implicit val scheduler: Scheduler = ExecutorServices.schedulerFromGlobalExecutionContext
 
   type FutureStack = Fx.fx2[UseCaseEither, TimedFuture]

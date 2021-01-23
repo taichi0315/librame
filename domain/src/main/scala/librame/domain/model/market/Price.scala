@@ -1,5 +1,8 @@
 package librame.domain.model.market
 
+/**
+ * @param money
+ */
 case class Price(
   money: Money
 ) {

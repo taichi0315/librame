@@ -1,5 +1,8 @@
 package librame.domain.model.market
 
+/**
+ * @param code
+ */
 abstract class Currency(val code: String)
 
 object Currency {

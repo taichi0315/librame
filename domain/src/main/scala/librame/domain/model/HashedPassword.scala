@@ -5,7 +5,11 @@ import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 
 import librame.domain.error.DomainErr
 
+/**
+ * @param value
+ */
 case class HashedPassword(value: String) extends SingleValueObject[String] {
+
   import HashedPassword.passwordHasher
 
 
@@ -17,6 +21,10 @@ object HashedPassword {
 
   lazy val passwordHasher = new BCryptPasswordHasher()
 
+  /**
+   * @param value
+   * @return
+   */
   def apply(value: String): Either[DomainErr, HashedPassword] =
     Right(value)
       .filterOrElse(_.length >= 8, LengthErr)
@@ -27,4 +35,5 @@ object HashedPassword {
 
   case object LengthErr extends DomainErr
   case object RegexErr  extends DomainErr
+
 }

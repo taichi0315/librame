@@ -1,13 +1,12 @@
 package librame.usecase
 
-import scala.concurrent.{Future, ExecutionContext}
-
-import cats.effect.IO
+import scala.concurrent.{ExecutionContext, Future}
+import cats.effect.{ContextShift, IO}
 import org.atnos.eff._
 
 trait EffUseCase {
 
-  implicit val cs = IO.contextShift(ExecutionContext.global)
+  implicit val cs: ContextShift[IO] = IO.contextShift(ExecutionContext.global)
 
   type UseCaseEither[T]  = Either[error.UseCaseErr, T]
   type _usecaseEither[R] = UseCaseEither |= R

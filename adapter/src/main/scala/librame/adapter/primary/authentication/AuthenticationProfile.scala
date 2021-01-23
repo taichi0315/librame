@@ -12,6 +12,10 @@ import play.api.mvc._
 import librame.adapter.secondary.kvs.CacheRepository
 import librame.domain.model.EntityId
 
+/**
+ * @param ec
+ * @tparam T
+ */
 abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionContext) {
 
   object AttrKeys {
@@ -25,7 +29,13 @@ abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionCon
   val sessionToken: AuthenticationSession
 
   val dataStore: CacheRepository[T]
-  
+
+  /**
+   * @param entityId
+   * @param result
+   * @param rh
+   * @return
+   */
   def loginSucceed(entityId: T, result: Result)(implicit rh: RequestHeader): Future[Result] = {
     val token = UUID.randomUUID.toString
     for {
@@ -34,6 +44,11 @@ abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionCon
       sessionToken.put(token)(result)
   }
 
+  /**
+   * @param result
+   * @param rh
+   * @return
+   */
   def logoutSucceed(result: Result)(implicit rh: RequestHeader): Future[Result] =
     for {
       _ <- sessionToken.get match {
@@ -43,6 +58,10 @@ abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionCon
     } yield
       sessionToken.discard(result)
 
+  /**
+   * @param rh
+   * @return
+   */
   def authenticate(implicit rh: RequestHeader): Future[Either[Result, (T, Result => Result)]] =
     sessionToken.get match {
       case None        => Future.successful(Left(Unauthorized))

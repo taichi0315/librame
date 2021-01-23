@@ -1,8 +1,8 @@
 package librame.adapter.primary
 
+import play.api.libs.json._
 import play.api.mvc.Result
 import play.api.mvc.Results._
-import play.api.libs.json._
 
 case class Error(status: Status, errorCode: String, target: String) {
   def toResult: Result = status(Json.toJson(JsValueError(errorCode, target)))
