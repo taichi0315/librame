@@ -2,8 +2,7 @@ import Dependencies._
 
 ThisBuild / scalaVersion     := "2.13.4"
 ThisBuild / version          := "0.5.0-SNAPSHOT"
-ThisBuild / organization     := "librame"
-ThisBuild / organizationName := "librame"
+ThisBuild / organization     := "io.github.neppyaga"
 
 lazy val commonSettings = Seq(
   resolvers ++= Seq(
