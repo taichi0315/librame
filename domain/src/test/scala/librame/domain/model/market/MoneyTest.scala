@@ -2,8 +2,6 @@ package librame.domain.model.market
 
 import java.lang.AssertionError
 
-import scala.util.Try
-
 import org.scalatest.FunSuite
 
 class MoneyTest extends FunSuite {
@@ -21,6 +19,11 @@ class MoneyTest extends FunSuite {
     assert(Money(-0.1).isLeft)
   }
 
+  test("不変条件") {
+    assertThrows[AssertionError](new Money(-1,   Currency.JPY))
+    assertThrows[AssertionError](new Money(-100, Currency.JPY))
+  }
+
   test("plus method success") {
     for {
       m1     <- Money(3)
@@ -33,16 +36,11 @@ class MoneyTest extends FunSuite {
   }
 
   test("plus method exception") {
-    val result = for {
-      m1     <- Money(3, Currency.JPY)
-      m2     <- Money(2, Currency.USD)
-      result <- Try(m1 + m2).toEither
-    } yield result
-
-    assert(result.isLeft)
-    result.left.map {
-      case _: UnsupportedOperationException => succeed
-      case _                                => fail()
+    assertThrows[UnsupportedOperationException] {
+      for {
+        m1 <- Money(3, Currency.JPY)
+        m2 <- Money(2, Currency.USD)
+      } yield m1 + m2
     }
   }
   
@@ -58,30 +56,20 @@ class MoneyTest extends FunSuite {
   }
 
   test("minus method ensuring") {
-    val result = for {
-      m1     <- Money(3)
-      m2     <- Money(4)
-      result <- Try(m1 - m2).toEither
-    } yield result
-
-    assert(result.isLeft)
-    result.left.map {
-      case _: AssertionError => succeed
-      case _                 => fail()
+    assertThrows[AssertionError] {
+      for {
+        m1 <- Money(3)
+        m2 <- Money(4)
+      } yield m1 - m2
     }
   }
 
   test("minus method exception") {
-    val result = for {
-      m1     <- Money(3, Currency.JPY)
-      m2     <- Money(2, Currency.USD)
-      result <- Try(m1 - m2).toEither
-    } yield result
-
-    assert(result.isLeft)
-    result.left.map {
-      case _: UnsupportedOperationException => succeed
-      case _                                => fail()
+    assertThrows[UnsupportedOperationException] {
+      for {
+        m1 <- Money(3, Currency.JPY)
+        m2 <- Money(2, Currency.USD)
+      } yield m1 - m2
     }
   }
 
@@ -96,15 +84,10 @@ class MoneyTest extends FunSuite {
   }
 
   test("mul method require") {
-    val result = for {
-      m1     <- Money(3)
-      result <- Try(m1 * -1).toEither
-    } yield result
-
-    assert(result.isLeft)
-    result.left.map {
-      case _: IllegalArgumentException => succeed
-      case _                           => fail()
+    assertThrows[IllegalArgumentException] {
+      for {
+        m1 <- Money(3)
+      } yield m1 * -1
     }
   }
 
@@ -119,28 +102,18 @@ class MoneyTest extends FunSuite {
   }
 
   test("div method require 1") {
-    val result = for {
-      m1     <- Money(3)
-      result <- Try(m1 / -1).toEither
-    } yield result
-
-    assert(result.isLeft)
-    result.left.map {
-      case _: IllegalArgumentException => succeed
-      case _                           => fail()
+    assertThrows[IllegalArgumentException] {
+      for {
+        m1 <- Money(3)
+      } yield m1 / -1
     }
   }
 
   test("div method require 2") {
-    val result = for {
-      m1     <- Money(3)
-      result <- Try(m1 / 0).toEither
-    } yield result
-
-    assert(result.isLeft)
-    result.left.map {
-      case _: IllegalArgumentException => succeed
-      case _                           => fail()
+    assertThrows[IllegalArgumentException] {
+      for {
+        m1 <- Money(3)
+      } yield m1 / 0
     }
   }
 }
