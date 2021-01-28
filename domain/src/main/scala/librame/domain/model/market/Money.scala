@@ -12,6 +12,9 @@ case class Money(
   value:    BigDecimal,
   currency: Currency
 ) {
+  // 不変条件
+  assert(value >= 0, "金額が0以上")
+
   /**
    * @param that
    * @return
