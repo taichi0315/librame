@@ -18,7 +18,7 @@ lazy val commonSettings = Seq(
 
 lazy val root = (project in file("."))
   .settings(commonSettings)
-  .aggregate(domain, usecase, secondaryAdapter)
+  .aggregate(domain, usecase, secondaryAdapter, primaryAdapter)
 
 lazy val domain = (project in file("domain"))
   .settings(

@@ -1,4 +1,4 @@
-package librame.adapter.primary.authentication
+package librame.primary.adapter.authentication
 
 import java.util.UUID
 
@@ -9,7 +9,7 @@ import play.api.libs.typedmap.TypedKey
 import play.api.mvc.Results.Status
 import play.api.mvc._
 
-import librame.adapter.secondary.kvs.CacheRepository
+import librame.secondary.adapter.kvs.CacheRepository
 import librame.domain.model.EntityId
 
 /**
