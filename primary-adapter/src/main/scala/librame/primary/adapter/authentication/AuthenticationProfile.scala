@@ -9,8 +9,8 @@ import play.api.libs.typedmap.TypedKey
 import play.api.mvc.Results.Status
 import play.api.mvc._
 
-import librame.secondary.adapter.kvs.CacheRepository
 import librame.domain.model.EntityId
+import librame.secondary.adapter.kvs.CacheRepository
 
 /**
  * @param ec

@@ -1,6 +1,7 @@
 package librame.usecase
 
 import scala.concurrent.{ExecutionContext, Future}
+
 import cats.effect.{ContextShift, IO}
 import org.atnos.eff._
 
