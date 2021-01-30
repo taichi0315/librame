@@ -18,7 +18,7 @@ lazy val commonSettings = Seq(
 
 lazy val root = (project in file("."))
   .settings(commonSettings)
-  .aggregate(domain, usecase, adapter)
+  .aggregate(domain, usecase, secondaryAdapter, primaryAdapter)
 
 lazy val domain = (project in file("domain"))
   .settings(
@@ -41,10 +41,10 @@ lazy val usecase = (project in file("usecase"))
   )
   .dependsOn(domain)
 
-lazy val adapter = (project in file("adapter"))
+lazy val secondaryAdapter = (project in file("secondary-adapter"))
   .settings(
     commonSettings,
-    name := "librame-adapter",
+    name := "librame-secondary-adapter",
     libraryDependencies ++= Seq(
       "mysql"                 % "mysql-connector-java"  % "5.1.48",
       "com.typesafe.slick"    %% "slick" % "3.3.3",
@@ -54,6 +54,13 @@ lazy val adapter = (project in file("adapter"))
     )
   )
   .dependsOn(domain, usecase)
+
+lazy val primaryAdapter = (project in file("primary-adapter"))
+  .settings(
+    commonSettings,
+    name := "librame-primary-adapter"
+  )
+  .dependsOn(domain, usecase, secondaryAdapter)
 
 // For Scalafix
 ThisBuild / semanticdbEnabled := true
