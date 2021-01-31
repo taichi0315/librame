@@ -18,4 +18,12 @@ case class Price(
   def mul(factor: BigDecimal): Price = Price(this.money * factor)
   def /(factor: BigDecimal): Price = div(factor)
   def div(factor: BigDecimal): Price = Price(this.money / factor)
+
+  /**
+   * @param value
+   * @param currency
+   */
+  def apply(value: BigDecimal, currency: Currency = Currency.JPY): Either[Unit, Price] =
+    Money(value, currency)
+      .map(new Price(_))
 }
