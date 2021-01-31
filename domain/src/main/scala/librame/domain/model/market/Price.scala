@@ -18,7 +18,9 @@ case class Price(
   def mul(factor: BigDecimal): Price = Price(this.money * factor)
   def /(factor: BigDecimal): Price = div(factor)
   def div(factor: BigDecimal): Price = Price(this.money / factor)
+}
 
+object Price {
   /**
    * @param value
    * @param currency
