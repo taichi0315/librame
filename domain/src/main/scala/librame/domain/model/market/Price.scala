@@ -24,6 +24,7 @@ object Price {
   /**
    * @param value
    * @param currency
+   * @return
    */
   def apply(value: BigDecimal, currency: Currency = Currency.JPY): Either[Unit, Price] =
     Money(value, currency)

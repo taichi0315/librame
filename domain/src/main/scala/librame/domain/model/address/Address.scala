@@ -19,23 +19,23 @@ case class Address(
 
 object Address {
   /**
-   * @param rawCountryCode
-   * @param rawZipCode
+   * @param countryCodeValue
+   * @param zipCodeValue
    * @param city
    * @param address1
    * @param address2
    * @return
    */
   def apply(
-    rawCountryCode: String,
-    rawZipCode:     String,
-    city:           String,
-    address1:       String,
-    address2:       String
+    countryCodeValue: String,
+    zipCodeValue:     String,
+    city:             String,
+    address1:         String,
+    address2:         String
   ): Either[DomainErr, Address] =
     for {
-      countryCode <- CountryCode(rawCountryCode).left.map(_ => CountryCodeValidateErr)
-      zipCode     <- ZipCode(rawZipCode).left.map(_ => ZipCodeValidateErr)
+      countryCode <- CountryCode(countryCodeValue).left.map(_ => CountryCodeValidateErr)
+      zipCode     <- ZipCode(zipCodeValue).left.map(_ => ZipCodeValidateErr)
     } yield
       new Address(countryCode, zipCode, city, address1, address2)
 
