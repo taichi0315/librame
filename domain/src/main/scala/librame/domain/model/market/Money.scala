@@ -12,7 +12,7 @@ case class Money(
   value:    BigDecimal,
   currency: Currency
 ) {
-  // 不変条件
+  /** 不変条件 */
   assert(value >= 0, "金額が0以上")
 
   /**
@@ -70,6 +70,7 @@ object Money {
       .filterOrElse(_ >= 0, ())
       .map(v => new Money(v, currency))
 
+  /** implict value for Monoid */
   implicit val moneyMonoid: Monoid[Money] = new Monoid[Money] {
     def empty: Money = new Money(0, Currency.JPY)
 

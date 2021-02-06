@@ -13,8 +13,12 @@ case class HashedPassword(value: String) extends SingleValueObject[String] {
   import HashedPassword.passwordHasher
 
 
-  def verify(rawPassword: String): Boolean =
-    passwordHasher.matches(new PasswordInfo("bcrypt", value), rawPassword)
+  /**
+   * @param passwordValue
+   * @return
+   */
+  def verify(passwordValue: String): Boolean =
+    passwordHasher.matches(new PasswordInfo("bcrypt", value), passwordValue)
 }
 
 object HashedPassword {

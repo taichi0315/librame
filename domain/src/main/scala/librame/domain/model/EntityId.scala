@@ -12,6 +12,7 @@ object EntityId {
   /**
    * @param tag
    * @tparam T
+   * @return
    */
   def generate[T <: EntityId](implicit tag: ClassTag[T]): T =
     tag.runtimeClass
@@ -23,6 +24,7 @@ object EntityId {
    * @param str
    * @param tag
    * @tparam T
+   * @return
    */
   def fromString[T <: EntityId](str: String)(implicit tag: ClassTag[T]): T =
     tag.runtimeClass
