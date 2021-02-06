@@ -1,7 +1,5 @@
 package librame.secondary.adapter.kvs
 
-import java.util.UUID
-
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Future, ExecutionContext}
 import scala.reflect.ClassTag
@@ -16,10 +14,12 @@ import librame.domain.model.EntityId
  * @param ec
  * @tparam T
  */
-class PlayRedisRepository[T <: EntityId : ClassTag](
+class PlayRedisRepository[T <: EntityId](
   cache: CacheAsyncApi
-) (implicit ec: ExecutionContext) 
-extends CacheRepository[T] {
+) (implicit
+  ec:  ExecutionContext,
+  tag: ClassTag[T]
+) extends CacheRepository[T] {
 
   /**
    * @param key
@@ -39,7 +39,7 @@ extends CacheRepository[T] {
   def get(key: String): Future[Option[T]] =
     for {
       strOpt <- cache.get[String](key)
-    } yield strOpt.map(convertStringToEntityId(_))
+    } yield strOpt.map(EntityId.fromString[T](_))
 
   /**
    * @param key
@@ -49,15 +49,4 @@ extends CacheRepository[T] {
     for {
       _ <- cache.remove(key)
     } yield ()
-
-  /**
-   * @param str
-   * @return
-   */
-  def convertStringToEntityId(str: String): T =
-    implicitly[ClassTag[T]]
-      .runtimeClass
-      .getConstructor(classOf[UUID])
-      .newInstance(UUID.fromString(str))
-      .asInstanceOf[T]
 }
