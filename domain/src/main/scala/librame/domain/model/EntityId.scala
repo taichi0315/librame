@@ -9,12 +9,21 @@ trait EntityId extends SingleValueObject[UUID] {
 }
 
 object EntityId {
+  /**
+   * @param tag
+   * @tparam T
+   */
   def generate[T <: EntityId](implicit tag: ClassTag[T]): T =
     tag.runtimeClass
       .getConstructor(classOf[UUID])
       .newInstance(UUID.randomUUID)
       .asInstanceOf[T]
 
+  /**
+   * @param str
+   * @param tag
+   * @tparam T
+   */
   def fromString[T <: EntityId](str: String)(implicit tag: ClassTag[T]): T =
     tag.runtimeClass
       .getConstructor(classOf[UUID])

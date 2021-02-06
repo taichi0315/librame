@@ -10,8 +10,8 @@ import librame.domain.model.EntityId
 
 /**
  * @param cache
- * @param classTag$T$0
  * @param ec
+ * @param tag
  * @tparam T
  */
 class PlayRedisRepository[T <: EntityId](
