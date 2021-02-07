@@ -1,8 +1,8 @@
 package librame.domain.model.util
 
 trait Enum
-trait EnumInt    extends Enum { val code: Int }
-trait EnumString extends Enum { val code: String }
+trait IntEnum    extends Enum { val code: Int }
+trait StringEnum extends Enum { val code: String }
 
 object Enum {
   abstract class Of[T <: Enum] {
@@ -10,14 +10,14 @@ object Enum {
   }
 }
 
-object EnumInt {
-  abstract class Of[T <: EnumInt] extends Enum.Of[T] {
+object IntEnum {
+  abstract class Of[T <: IntEnum] extends Enum.Of[T] {
     def apply(code: Int): T = values.find(_.code == code).get
   }
 }
 
-object EnumString {
-  abstract class Of[T <: EnumString] extends Enum.Of[T] {
+object StringEnum {
+  abstract class Of[T <: StringEnum] extends Enum.Of[T] {
     def apply(code: String): T = values.find(_.code == code).get
   }
 }
