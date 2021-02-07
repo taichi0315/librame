@@ -36,10 +36,10 @@ trait DoobieCustomColumnType {
 
   /** market value object */
   implicit val moneyWrite: Write[Money] =
-    Write[(BigDecimal, String)].contramap(p => (p.value, p.currency.code))
+    Write[(BigDecimal, Currency)].contramap(p => (p.value, p.currency))
 
   implicit val priceWrite: Write[Price] =
-    Write[(BigDecimal, String)].contramap(p => (p.money.value, p.money.currency.code))
+    Write[(BigDecimal, Currency)].contramap(p => (p.money.value, p.money.currency))
 
   /** util string enum object */
   implicit def stringEnumGet[T <: StringEnum](implicit tag: ClassTag[T]): Get[T] =
