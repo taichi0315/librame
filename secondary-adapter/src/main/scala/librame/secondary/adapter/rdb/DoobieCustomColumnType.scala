@@ -7,6 +7,7 @@ import scala.reflect.ClassTag
 import doobie.util._
 
 import librame.domain.model._
+import librame.domain.model.market._
 
 trait DoobieCustomColumnType {
 
@@ -29,4 +30,10 @@ trait DoobieCustomColumnType {
     }
   implicit def valueUUIDPut[T <: SingleValueObject[UUID]]: Put[T] =
     Put[String].contramap(_.value.toString)
+
+  implicit val moneyWrite: Write[Money] =
+    Write[(BigDecimal, String)].contramap(p => (p.value, p.currency.code))
+
+  implicit val priceWrite: Write[Price] =
+    Write[(BigDecimal, String)].contramap(p => (p.money.value, p.money.currency.code))
 }
