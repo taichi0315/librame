@@ -1,4 +1,4 @@
-package librame.domain.model
+package librame.domain.model.person
 
 /**
  * @param lastName
