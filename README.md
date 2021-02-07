@@ -36,3 +36,5 @@ librameを用いたプロジェクトのサンプルコードは以下のリポ�
 ### リポジトリ
 - [crossroad0201/ddd-on-scala](https://github.com/crossroad0201/ddd-on-scala)
 - [t2v/play2-auth](https://github.com/t2v/play2-auth)
+- [typelevel/squants](https://github.com/typelevel/squants)
+- [lloydmeta/enumeratum](https://github.com/lloydmeta/enumeratum)
