@@ -2,13 +2,12 @@ package librame.primary.adapter
 
 import play.api.libs.json._
 
-/**
- * @param errorCode
- * @param target
- */
+/** @param errorCode
+  * @param target
+  */
 case class JsValueError(
   errorCode: String,
-  target:    String
+  target: String
 )
 
 object JsValueError {

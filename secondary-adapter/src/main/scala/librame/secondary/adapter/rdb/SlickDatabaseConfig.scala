@@ -2,7 +2,6 @@ package librame.secondary.adapter.rdb
 
 import slick.jdbc.JdbcBackend.Database
 
-
 trait SlickDatabaseConfig {
   val db: Database = Database.forConfig("rdb")
 
@@ -10,4 +9,3 @@ trait SlickDatabaseConfig {
 }
 
 object SlickDatabaseConfig extends SlickDatabaseConfig
-

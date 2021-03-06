@@ -11,9 +11,8 @@ import org.atnos.eff.syntax.future._
 
 import librame.usecase.EffUseCase.UseCaseEither
 
-/**
- * @param ec
- */
+/** @param ec
+  */
 class EffExtension()(implicit ec: ExecutionContext) extends {
   implicit val scheduler: Scheduler = ExecutorServices.schedulerFromGlobalExecutionContext
 

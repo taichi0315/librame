@@ -1,11 +1,10 @@
 package librame.domain.model.person
 
-/**
- * @param lastName
- * @param firstName
- */
+/** @param lastName
+  * @param firstName
+  */
 case class Name(
-  lastName:  String,
+  lastName: String,
   firstName: String
 ) {
   lazy val fullName: String = s"$lastName $firstName"

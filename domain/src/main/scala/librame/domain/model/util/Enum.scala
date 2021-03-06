@@ -1,7 +1,7 @@
 package librame.domain.model.util
 
 trait Enum
-trait IntEnum    extends Enum { val code: Int }
+trait IntEnum    extends Enum { val code: Int    }
 trait StringEnum extends Enum { val code: String }
 
 object Enum {

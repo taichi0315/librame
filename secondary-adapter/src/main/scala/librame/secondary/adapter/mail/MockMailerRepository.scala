@@ -7,10 +7,10 @@ import scala.concurrent.Future
 import librame.domain.model.EmailAddress
 
 class MockMailerRepository extends MailerRepository {
-  /**
-   * @param to
-   * @return
-   */
+
+  /** @param to
+    * @return
+    */
   def send(to: EmailAddress): Future[Option[String]] = {
     val token = UUID.randomUUID.toString
 

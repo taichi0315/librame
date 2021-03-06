@@ -20,7 +20,7 @@ trait DoobieCustomColumnType {
         .newInstance(str)
         .asInstanceOf[T]
     }
-  implicit def valueStringPut[T <: SingleValueObject[String]]: Put[T] =
+  implicit def valueStringPut[T <: SingleValueObject[String]]: Put[T]                            =
     Put[String].contramap(_.value)
 
   /** single value uuid */
@@ -31,7 +31,7 @@ trait DoobieCustomColumnType {
         .newInstance(UUID.fromString(str))
         .asInstanceOf[T]
     }
-  implicit def valueUUIDPut[T <: SingleValueObject[UUID]]: Put[T] =
+  implicit def valueUUIDPut[T <: SingleValueObject[UUID]]: Put[T]                            =
     Put[String].contramap(_.value.toString)
 
   /** market value object */
@@ -48,8 +48,8 @@ trait DoobieCustomColumnType {
         .getConstructor(classOf[String])
         .newInstance(str)
         .asInstanceOf[T]
-  }
-  implicit def stringEnumPut[T <: StringEnum]: Put[T] =
+    }
+  implicit def stringEnumPut[T <: StringEnum]: Put[T]                            =
     Put[String].contramap(_.code)
 
   /** util int enum object */
@@ -59,7 +59,7 @@ trait DoobieCustomColumnType {
         .getConstructor(classOf[Int])
         .newInstance(int)
         .asInstanceOf[T]
-  }
-  implicit def intEnumPut[T <: IntEnum]: Put[T] =
+    }
+  implicit def intEnumPut[T <: IntEnum]: Put[T]                            =
     Put[Int].contramap(_.code)
 }

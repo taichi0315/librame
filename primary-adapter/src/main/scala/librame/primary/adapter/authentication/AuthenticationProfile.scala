@@ -12,11 +12,10 @@ import play.api.mvc._
 import librame.domain.model.EntityId
 import librame.secondary.adapter.kvs.CacheRepository
 
-/**
- * @param ec
- * @tparam T
- */
-abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionContext) {
+/** @param ec
+  * @tparam T
+  */
+abstract class AuthenticationProfile[T <: EntityId]()(implicit ec: ExecutionContext) {
 
   object AttrKeys {
     val Auth: TypedKey[T] = TypedKey("Authentication")
@@ -30,48 +29,42 @@ abstract class AuthenticationProfile[T <: EntityId]() (implicit ec: ExecutionCon
 
   val dataStore: CacheRepository[T]
 
-  /**
-   * @param entityId
-   * @param result
-   * @param rh
-   * @return
-   */
+  /** @param entityId
+    * @param result
+    * @param rh
+    * @return
+    */
   def loginSucceed(entityId: T, result: Result)(implicit rh: RequestHeader): Future[Result] = {
     val token = UUID.randomUUID.toString
     for {
       _ <- dataStore.set(token, entityId, sessionTimeout)
-    } yield
-      sessionToken.put(token)(result)
+    } yield sessionToken.put(token)(result)
   }
 
-  /**
-   * @param result
-   * @param rh
-   * @return
-   */
+  /** @param result
+    * @param rh
+    * @return
+    */
   def logoutSucceed(result: Result)(implicit rh: RequestHeader): Future[Result] =
     for {
       _ <- sessionToken.get match {
         case Some(token) => dataStore.remove(token)
         case None        => Future.successful(())
       }
-    } yield
-      sessionToken.discard(result)
+    } yield sessionToken.discard(result)
 
-  /**
-   * @param rh
-   * @return
-   */
+  /** @param rh
+    * @return
+    */
   def authenticate(implicit rh: RequestHeader): Future[Either[Result, (T, Result => Result)]] =
     sessionToken.get match {
       case None        => Future.successful(Left(Unauthorized))
       case Some(token) =>
         for {
           entityIdOpt <- dataStore.get(token)
-        } yield
-          entityIdOpt match {
-            case None           => Left(Unauthorized)
-            case Some(entityId) => Right((entityId, sessionToken.put(token) _))
-          }
+        } yield entityIdOpt match {
+          case None           => Left(Unauthorized)
+          case Some(entityId) => Right((entityId, sessionToken.put(token) _))
+        }
     }
 }

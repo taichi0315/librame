@@ -1,18 +1,17 @@
 package librame.domain.model
 
-/**
- * @param value
- */
+/** @param value
+  */
 case class Quantity(value: Int) extends SingleValueObject[Int] {
+
   /** 不変条件 */
   assert(value >= 0)
 }
 
 object Quantity {
 
-  /**
-   * @param value
-   */
+  /** @param value
+    */
   def apply(value: Int): Either[Unit, Quantity] =
     Right(value)
       .filterOrElse(_ >= 0, ())
