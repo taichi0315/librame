@@ -4,6 +4,12 @@ ThisBuild / scalaVersion := "2.13.4"
 ThisBuild / version := "0.5.0-SNAPSHOT"
 ThisBuild / organization := "io.github.neppyaga"
 
+ThisBuild / organizationName := "Kushiro Taichi"
+ThisBuild / startYear := Some(2021)
+ThisBuild / licenses += ("MIT", new URL(
+  "https://raw.githubusercontent.com/neppyaga/librame/develop/LICENSE"
+))
+
 lazy val commonSettings = Seq(
   resolvers ++= Seq(
     "Atlassian Releases" at "https://maven.atlassian.com/public/"
