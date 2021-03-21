@@ -26,7 +26,7 @@ lazy val root = (project in file("."))
   .settings(commonSettings)
   .aggregate(domain, usecase, secondaryAdapter, primaryAdapter)
 
-lazy val domain = (project in file("domain"))
+lazy val domain = (project in file("modules/domain"))
   .settings(
     commonSettings,
     name := "librame-domain",
@@ -36,7 +36,7 @@ lazy val domain = (project in file("domain"))
     )
   )
 
-lazy val usecase = (project in file("usecase"))
+lazy val usecase = (project in file("modules/usecase"))
   .settings(
     commonSettings,
     name := "librame-usecase",
@@ -47,7 +47,7 @@ lazy val usecase = (project in file("usecase"))
   )
   .dependsOn(domain)
 
-lazy val secondaryAdapter = (project in file("secondary-adapter"))
+lazy val secondaryAdapter = (project in file("modules/secondary-adapter"))
   .settings(
     commonSettings,
     name := "librame-secondary-adapter",
@@ -61,7 +61,7 @@ lazy val secondaryAdapter = (project in file("secondary-adapter"))
   )
   .dependsOn(domain, usecase)
 
-lazy val primaryAdapter = (project in file("primary-adapter"))
+lazy val primaryAdapter = (project in file("modules/primary-adapter"))
   .settings(
     commonSettings,
     name := "librame-primary-adapter"
