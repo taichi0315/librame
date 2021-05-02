@@ -54,10 +54,7 @@ object Address {
     address2: String
   ): Either[DomainValidation, Address] =
     for {
-      countryCode <- CountryCode(countryCodeValue).left.map(_ => CountryCodeValidateValidation)
-      zipCode     <- ZipCode(zipCodeValue).left.map(_ => ZipCodeValidateValidation)
-    } yield new Address(countryCode, zipCode, city, address1, address2)
-
-  case object CountryCodeValidateValidation extends DomainValidation
-  case object ZipCodeValidateValidation     extends DomainValidation
+      countryCode <- CountryCode(countryCodeValue)
+      zipCode     <- ZipCode(zipCodeValue)
+    } yield Address(countryCode, zipCode, city, address1, address2)
 }

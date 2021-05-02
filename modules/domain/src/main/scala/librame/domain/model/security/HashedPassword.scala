@@ -55,7 +55,7 @@ object HashedPassword {
 
   val PASSWORD_REGEX = """[-_@+*;:#$%&A-Za-z0-9]+"""
 
-  case object LengthValidation extends DomainValidation
-  case object RegexValidation  extends DomainValidation
+  case object LengthValidation extends DomainValidation("")
+  case object RegexValidation  extends DomainValidation("")
 
 }

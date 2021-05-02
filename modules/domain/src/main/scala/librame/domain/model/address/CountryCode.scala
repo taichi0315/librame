@@ -22,6 +22,7 @@
 package librame.domain.model.address
 
 import librame.domain.model.SingleValueObject
+import librame.domain.error.DomainValidation
 
 /** @param value
   */
@@ -32,10 +33,12 @@ object CountryCode {
   /** @param value
     * @return
     */
-  def apply(value: String): Either[Unit, CountryCode] =
+  def apply(value: String): Either[DomainValidation, CountryCode] =
     Right(value)
-      .filterOrElse(_.matches(COUNTRY_CODE_REGEX), ())
+      .filterOrElse(_.matches(COUNTRY_CODE_REGEX), RegexValidation)
       .map(new CountryCode(_))
 
   val COUNTRY_CODE_REGEX = """[0-9\-]+"""
+
+  case object RegexValidation extends DomainValidation("")
 }

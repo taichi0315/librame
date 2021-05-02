@@ -21,6 +21,7 @@
 
 package librame.domain.model.address
 
+import librame.domain.error.DomainValidation
 import librame.domain.model.SingleValueObject
 
 /** @param value
@@ -32,10 +33,12 @@ object ZipCode {
   /** @param value
     * @return
     */
-  def apply(value: String): Either[Unit, ZipCode] =
+  def apply(value: String): Either[DomainValidation, ZipCode] =
     Right(value)
-      .filterOrElse(_.matches(ZIP_CODE_REGEX), ())
+      .filterOrElse(_.matches(ZIP_CODE_REGEX), RegexValidation)
       .map(new ZipCode(_))
 
   val ZIP_CODE_REGEX = """[0-9]{3}-?[0-9]{4}"""
+
+  case object RegexValidation extends DomainValidation("")
 }
