@@ -23,7 +23,9 @@ package librame.domain
 
 package object error {
 
-  trait DomainErr
+  trait DomainValidation {
+    val errorMessage: String = ""
+  }
 
   trait InfraErr
 

@@ -21,7 +21,7 @@
 
 package librame.domain.model.address
 
-import librame.domain.error.DomainErr
+import librame.domain.error.DomainValidation
 
 /** @param countryCode
   * @param zipCode
@@ -52,12 +52,12 @@ object Address {
     city: String,
     address1: String,
     address2: String
-  ): Either[DomainErr, Address] =
+  ): Either[DomainValidation, Address] =
     for {
-      countryCode <- CountryCode(countryCodeValue).left.map(_ => CountryCodeValidateErr)
-      zipCode     <- ZipCode(zipCodeValue).left.map(_ => ZipCodeValidateErr)
+      countryCode <- CountryCode(countryCodeValue).left.map(_ => CountryCodeValidateValidation)
+      zipCode     <- ZipCode(zipCodeValue).left.map(_ => ZipCodeValidateValidation)
     } yield new Address(countryCode, zipCode, city, address1, address2)
 
-  case object CountryCodeValidateErr extends DomainErr
-  case object ZipCodeValidateErr     extends DomainErr
+  case object CountryCodeValidateValidation extends DomainValidation
+  case object ZipCodeValidateValidation     extends DomainValidation
 }

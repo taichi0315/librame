@@ -24,7 +24,7 @@ package librame.domain.model.security
 import com.mohiva.play.silhouette.api.util.PasswordInfo
 import com.mohiva.play.silhouette.password.BCryptPasswordHasher
 
-import librame.domain.error.DomainErr
+import librame.domain.error.DomainValidation
 import librame.domain.model.SingleValueObject
 
 /** @param value
@@ -47,15 +47,15 @@ object HashedPassword {
   /** @param value
     * @return
     */
-  def apply(value: String): Either[DomainErr, HashedPassword] =
+  def apply(value: String): Either[DomainValidation, HashedPassword] =
     Right(value)
-      .filterOrElse(_.length >= 8, LengthErr)
-      .filterOrElse(_.matches(PASSWORD_REGEX), RegexErr)
+      .filterOrElse(_.length >= 8, LengthValidation)
+      .filterOrElse(_.matches(PASSWORD_REGEX), RegexValidation)
       .map(v => new HashedPassword(passwordHasher.hash(v).password))
 
   val PASSWORD_REGEX = """[-_@+*;:#$%&A-Za-z0-9]+"""
 
-  case object LengthErr extends DomainErr
-  case object RegexErr  extends DomainErr
+  case object LengthValidation extends DomainValidation
+  case object RegexValidation  extends DomainValidation
 
 }
