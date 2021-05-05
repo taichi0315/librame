@@ -27,6 +27,8 @@ import scala.reflect.ClassTag
 
 trait EntityId extends SingleValueObject[UUID] {
   val value: UUID
+
+  override def toString: String = value.toString
 }
 
 object EntityId {

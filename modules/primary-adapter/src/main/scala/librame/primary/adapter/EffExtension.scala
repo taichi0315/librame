@@ -21,16 +21,14 @@
 
 package librame.primary.adapter
 
-import scala.concurrent.{Future, ExecutionContext}
-
+import scala.concurrent.{ExecutionContext, Future}
 import cats.effect.IO
 import org.atnos.eff._
 import org.atnos.eff.concurrent.Scheduler
 import org.atnos.eff.syntax.addon.cats.effect._
 import org.atnos.eff.syntax.either._
-import org.atnos.eff.syntax.future._
-
 import librame.usecase.EffUseCase.UseCaseEither
+import monix.eval.Task
 
 /** @param ec
   */
@@ -39,8 +37,10 @@ class EffExtension()(implicit ec: ExecutionContext) extends {
 
   type FutureStack = Fx.fx2[UseCaseEither, TimedFuture]
   type IOStack     = Fx.fx2[UseCaseEither, IO]
+  type TaskStack   = Fx.fx2[UseCaseEither, Task]
 
   implicit class FutureStackOps[T](future: Eff[FutureStack, T]) {
+    import org.atnos.eff.syntax.future._
     def run: Future[UseCaseEither[T]] =
       future.runEither.runAsync
   }
@@ -48,5 +48,13 @@ class EffExtension()(implicit ec: ExecutionContext) extends {
   implicit class IOStackOps[T](io: Eff[IOStack, T]) {
     def run: Future[UseCaseEither[T]] =
       io.runEither.unsafeToFuture
+  }
+
+  implicit class TaskStackOps[T](task: Eff[TaskStack, T]) {
+    import org.atnos.eff.syntax.addon.monix.task._
+    import monix.execution.Scheduler.Implicits.global
+
+    def run: Future[UseCaseEither[T]] =
+      task.runEither.runAsync.runToFuture
   }
 }

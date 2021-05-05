@@ -23,4 +23,10 @@ package librame.usecase
 
 package object error {
   trait UseCaseErr
+
+  case class NotFoundErr(errorMessage: String) extends UseCaseErr
+  object NotFoundErr {
+    def apply(entityName: String): NotFoundErr = new NotFoundErr(s"対象の${entityName}が見つかりません")
+  }
+  case class DomainValidationErr(errorMessage: String) extends UseCaseErr
 }

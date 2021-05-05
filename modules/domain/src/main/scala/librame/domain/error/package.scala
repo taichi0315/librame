@@ -24,7 +24,4 @@ package librame.domain
 package object error {
 
   abstract class DomainValidation(val errorMessage: String)
-
-  trait InfraErr
-
 }

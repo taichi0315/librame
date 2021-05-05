@@ -23,6 +23,7 @@ package librame.secondary.adapter.rdb
 
 import scala.concurrent.ExecutionContext
 
+import monix.eval.Task
 import cats.effect.{IO, Blocker}
 import doobie._
 import play.api.db.DBApi
@@ -33,8 +34,8 @@ abstract class DoobieDatabaseConfig(db: DBApi) {
 
   val connection = db.database("default").getConnection()
 
-  val xa: Transactor[IO] =
-    Transactor.fromConnection[IO](
+  val xa: Transactor[Task] =
+    Transactor.fromConnection[Task](
       connection,
       Blocker.liftExecutionContext(ExecutionContexts.synchronous)
     )

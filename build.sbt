@@ -41,8 +41,9 @@ lazy val usecase = (project in file("modules/usecase"))
     commonSettings,
     name := "librame-usecase",
     libraryDependencies ++= Seq(
-      "org.atnos" %% "eff"             % "5.12.0",
-      "org.atnos" %% "eff-cats-effect" % "5.12.0"
+      "org.atnos" %% "eff"             % "5.14.0",
+      "org.atnos" %% "eff-monix"       % "5.14.0",
+      "org.atnos" %% "eff-cats-effect" % "5.14.0"
     )
   )
   .dependsOn(domain)
@@ -56,7 +57,8 @@ lazy val secondaryAdapter = (project in file("modules/secondary-adapter"))
       "com.typesafe.slick"    %% "slick"                % "3.3.3",
       "org.tpolecat"          %% "doobie-core"          % "0.9.0",
       "com.github.karelcemus" %% "play-redis"           % "2.6.1",
-      "com.typesafe.play"     %% "play-jdbc"            % "2.8.2"
+      "com.typesafe.play"     %% "play-jdbc"            % "2.8.2",
+      "io.monix"              %% "monix"                % "3.3.0"
     )
   )
   .dependsOn(domain, usecase)

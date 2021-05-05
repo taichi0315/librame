@@ -28,7 +28,7 @@ import play.api.libs.json._
   */
 case class JsValueError(
   errorCode: String,
-  target: String
+  errorMessage: String
 )
 
 object JsValueError {
